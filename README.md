@@ -1,3 +1,5 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/49f2ed15-a9df-4ec3-8085-6131915c8a86/deploy-status)](https://app.netlify.com/sites/maxcaplan/deploys)
+
 	==================================================================
          __    __  ______  __  __                                  
         /\ "-./  \/\  __ \/\_\_\_\                                 
