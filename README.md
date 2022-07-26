@@ -1,32 +1,17 @@
-# Welcome to [Astro](https://astro.build)
+	==================================================================
+         __    __  ______  __  __                                  
+        /\ "-./  \/\  __ \/\_\_\_\                                 
+        \ \ \-./\ \ \  __ \/_/\_\/_                                
+         \ \_\ \ \_\ \_\ \_\/\_\/\_\                               
+          \/_/  \/_/\/_/\/_/\/_/\/_/__  __      ______  __   __    
+               /\  ___\/\  __ \/\  == \/\ \    /\  __ \/\ "-.\ \   
+               \ \ \___\ \  __ \ \  _-/\ \ \___\ \  __ \ \ \-.  \  
+                \ \_____\ \_\ \_\ \_\   \ \_____\ \_\ \_\ \_\\"\_\ 
+                 \/_____/\/_/\/_/\/_/    \/_____/\/_/\/_/\/_/ \/_/ 
+    
+    ======================= Developer/Designer =======================                                                   
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```
-/
-├── public/
-│   └── favicon.ico
-├── src/
-│   ├── components/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
-
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
-
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components or layouts.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
+## >_ Commands
 
 All commands are run from the root of the project, from a terminal:
 
@@ -36,7 +21,3 @@ All commands are run from the root of the project, from a terminal:
 | `npm run dev`     | Starts local dev server at `localhost:3000`  |
 | `npm run build`   | Build your production site to `./dist/`      |
 | `npm run preview` | Preview your build locally, before deploying |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
