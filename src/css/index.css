@@ -1,0 +1,133 @@
+/* ==========================================================================
+   JetBrains Mono Font Face
+   ========================================================================== */
+/* Regular */
+@font-face {
+    font-family: "JetBrains Mono";
+    src: url("/assets/fonts/JetBrainsMono-Regular.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+}
+
+/* Italic */
+@font-face {
+    font-family: "JetBrains Mono";
+    src: url("/assets/fonts/JetBrainsMono-Italic.woff2") format("woff2");
+    font-weight: 400;
+    font-style: italic;
+}
+
+/* Bold */
+@font-face {
+    font-family: "JetBrains Mono";
+    src: url("/assets/fonts/JetBrainsMono-Bold.woff2") format("woff2");
+    font-weight: 700;
+    font-style: normal;
+}
+
+/* Bold Italic */
+@font-face {
+    font-family: "JetBrains Mono";
+    src: url("/assets/fonts/JetBrainsMono-BoldItalic.woff2") format("woff2");
+    font-weight: 700;
+    font-style: italic;
+}
+
+/* Extra Bold */
+@font-face {
+    font-family: "JetBrains Mono";
+    src: url("/assets/fonts/JetBrainsMono-ExtraBold.woff2") format("woff2");
+    font-weight: 800;
+    font-style: normal;
+}
+
+/* Extra Bold Italic */
+@font-face {
+    font-family: "JetBrains Mono";
+    src: url("/assets/fonts/JetBrainsMono-ExtraBoldItalic.woff2") format("woff2");
+    font-weight: 800;
+    font-style: italic;
+}
+
+/* Light */
+@font-face {
+    font-family: "JetBrains Mono";
+    src: url("/assets/fonts/JetBrainsMono-Light.woff2") format("woff2");
+    font-weight: 300;
+    font-style: normal;
+}
+
+/* Light Italic */
+@font-face {
+    font-family: "JetBrains Mono";
+    src: url("/assets/fonts/JetBrainsMono-LightItalic.woff2") format("woff2");
+    font-weight: 300;
+    font-style: italic;
+}
+
+/* ==========================================================================
+   Main Styles
+   ========================================================================== */
+
+html,
+body {
+    width: 100%;
+}
+
+/* ==========================================================================
+   Text Styles
+   ========================================================================== */
+
+p,
+b,
+i,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: "JetBrains Mono", monospace, 'Sans Serif';
+    font-size: 1.125rem;
+}
+
+p {
+    font-size: 1.125rem;
+}
+
+h1 {
+    font-size: 3.75rem;
+    font-weight: bold;
+}
+
+h2 {
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+h3 {
+    font-size: 2.25rem;
+    font-weight: bold;
+}
+
+h4 {
+    font-size: 1.875rem;
+}
+
+h5 {
+    font-size: 1.5rem;
+}
+
+h6 {
+    font-size: 1.25rem;
+}
+
+b {
+    font-weight: bold !important;
+    font-style: inherit;
+}
+
+i {
+    font-style: italic !important;
+    font-weight: inherit;
+}
