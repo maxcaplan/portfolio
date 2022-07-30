@@ -1,0 +1,90 @@
+#navbar {
+    position: absolute;
+    left: 0%;
+    top: 0%;
+    width: 100%;
+    z-index: 1000;
+}
+
+#navbar-container {
+    width: 100%;
+    height: 100%;
+    max-width: 1280px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: var(--s4);
+    padding-bottom: var(--s4);
+    padding-left: var(--s4);
+    padding-right: var(--s4);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#navbar-logo {
+    height: 2.25rem;
+    flex: none;
+    align-self: stretch;
+}
+
+#navbar-right {
+    width: 100%;
+    display: flex;
+    justify-content: end;
+}
+
+#navbar-links {
+    display: flex;
+    flex-direction: row;
+    gap: var(--s4)
+}
+
+.navbar-link,
+.active::before {
+    content: "> ";
+}
+
+.navbar-link {
+    color: var(--gray);
+    transition: all 0.15s linear;
+    text-align: center;
+}
+
+.navbar-link:hover {
+    color: var(--white);
+    text-decoration: underline;
+    text-decoration-style: wavy;
+    text-decoration-thickness: 1.5px;
+}
+
+.navbar-link-home, .navbar-link-source {
+    text-decoration: none !important;
+}
+
+.navbar-link-source:hover {
+    color: var(--orange)
+}
+
+.navbar-link-home:hover {
+    color: var(--blue);
+}
+
+.navbar-link-purple {
+    text-decoration-color: var(--purple) !important;
+}
+
+.navbar-link-green {
+    text-decoration-color: var(--green) !important;
+}
+
+.navbar-link-red {
+    text-decoration-color: var(--red) !important;
+}
+
+.navbar-link-teal {
+    text-decoration-color: var(--teal) !important;
+}
+
+.navbar-slash {
+    color: var(--gray)
+}
