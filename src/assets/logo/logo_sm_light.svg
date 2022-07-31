@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="17.262119mm"
+   height="14.25003mm"
+   viewBox="0 0 17.26212 14.25003"
+   version="1.1"
+   id="svg5273"
+   inkscape:version="1.2.1 (9c6d41e410, 2022-07-14)"
+   sodipodi:docname="logo_sm_light.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview5275"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="13.455443"
+     inkscape:cx="51.280362"
+     inkscape:cy="31.660049"
+     inkscape:window-width="2560"
+     inkscape:window-height="1528"
+     inkscape:window-x="0"
+     inkscape:window-y="36"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs5270" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-132.84666,-198.30378)">
+    <path
+       id="path2487"
+       style="fill:#121212;fill-opacity:1;stroke:none;stroke-width:0.904347;stroke-dasharray:none;stroke-opacity:1"
+       d="m 142.15699,198.30378 v 4.72368 h 1.57456 v -1.57456 h 4.80267 v 1.57456 h 1.57456 v -4.72368 z m 1.65355,4.80265 v 4.64471 h 4.64471 v -1.57456 h 1.65353 v -1.49559 h -1.65353 v -1.57456 z m -1.65355,4.7237 v 4.72368 h 7.95179 v -4.72368 h -1.57456 v 1.57456 h -4.80267 v -1.57456 z" />
+    <path
+       d="m 134.46565,201.4529 v 1.15664 h 0.14463 q 0.0289,-0.60724 0.39035,-0.95422 0.36145,-0.34699 0.95422,-0.34699 0.56385,0 0.93976,0.34699 0.39036,0.34698 0.53494,0.95422 h 0.0579 q 0.0289,-0.60724 0.39034,-0.95422 0.36146,-0.34699 0.95422,-0.34699 0.72288,0 1.1277,0.54939 0.41928,0.53494 0.41928,1.4747 v 6.07227 h -1.77829 v -5.82648 q 0,-0.79517 -0.57831,-0.79517 -0.28917,0 -0.40484,0.21685 -0.11558,0.20232 -0.11558,0.57832 v 5.82648 h -1.77829 v -5.82648 q 0,-0.79517 -0.57832,-0.79517 -0.28915,0 -0.40481,0.21685 -0.11558,0.20232 -0.11558,0.57832 v 5.82648 h -1.77831 v -7.95179 z"
+       style="font-size:6.66753px;font-family:'JetBrainsMonoExtraBold Nerd Font';-inkscape-font-specification:'JetBrainsMonoExtraBold Nerd Font';fill:#121212;fill-opacity:1;stroke-width:4.55364"
+       id="path2497" />
+    <path
+       style="fill:#000000;fill-opacity:1"
+       d="M 0,0 V 0"
+       id="path2771" />
+  </g>
+</svg>

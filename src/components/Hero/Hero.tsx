@@ -3,7 +3,6 @@ import "./Hero.css"
 type HeroProps = {}
 
 export function Hero(props: HeroProps) {
-
     // Splits each character of input string into individual spans
     const spanify = (text: string) => {
         return text.split("").map(char => {
@@ -20,16 +19,19 @@ export function Hero(props: HeroProps) {
 
             <div id="hero-container">
                 <div id="hero-text">
-                    <h5 className="hero-subtitle">
+                    <h6 className="hero-subtitle">
                         &lt;!-- I like to make things --&gt;
-                    </h5>
-                    <h1 className="hero-title">&lt;/DEVELOPER&gt;</h1>
+                    </h6>
 
-                    <h5 className="hero-subtitle">
+                    <h1 className="hero-title">&lt;/DEVELOPER&gt;</h1>
+                    <h1 className="hero-title-sm">&lt;/DEV&gt;</h1>
+
+                    <h6 className="hero-subtitle">
                         &lt;!-- And I like to make them look <span id="good">{spanify("GOOD")}</span> --&gt;
-                    </h5>
+                    </h6>
 
                     <h1 className="hero-title">&lt;/DESIGNER&gt;</h1>
+                    <h1 className="hero-title-sm">&lt;/DES&gt;</h1>
                 </div>
             </div>
         </div>

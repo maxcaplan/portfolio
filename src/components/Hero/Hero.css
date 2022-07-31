@@ -9,11 +9,11 @@
 #hero-container {
     width: 100%;
     height: 100%;
-    max-width: 1280px;
+    max-width: var(--xl);
     margin-left: auto;
     margin-right: auto;
-    padding-top: var(--s8);
-    padding-bottom: var(--s32);
+    padding-top: var(--s4);
+    padding-bottom: var(--s12);
     padding-left: var(--s4);
     padding-right: var(--s4);
     display: flex;
@@ -22,7 +22,7 @@
 
 .corner {
     position: absolute;
-    display: block;
+    display: none;
     line-height: 100%;
     padding: var(--s2);
     font-size: var(--text-5);
@@ -52,17 +52,29 @@
     color: var(--teal);
 }
 
-.hero-title {
-    font-size: 8rem;
+.hero-title,
+.hero-title-sm {
     font-weight: 800;
     font-variant-ligatures: none;
     margin: 0;
 }
 
+.hero-title {
+    font-size: 4rem;
+    display: none;
+}
+
+.hero-title-sm {
+    font-size: 4.5rem;
+    display: block;
+}
+
 .hero-subtitle {
     font-style: italic;
+    font-weight: 300;
     font-variant-ligatures: none;
     color: var(--gray);
+    word-wrap: normal;
 }
 
 #good span {
@@ -90,4 +102,42 @@
 
 #good span:nth-child(4):hover {
     color: var(--teal);
+}
+
+@media only screen and (min-width: 640px) {
+    .hero-title {
+        display: inline;
+    }
+
+    .hero-title-sm {
+        display: none;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    #hero-container {
+        padding-bottom: var(--s32);
+    }
+
+    .hero-subtitle {
+        font-size: var(--text-5);
+    }
+}
+
+@media only screen and (min-width: 1024px) {
+    .hero-title {
+        font-size: 6rem;
+    }
+}
+
+@media only screen and (min-width: 1280px) {
+    .hero-title {
+        font-size: 8rem;
+    }
+}
+
+@media only screen and (min-width: 1332px) {
+    .corner {
+        display: block;
+    }
 }
