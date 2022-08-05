@@ -45,6 +45,9 @@ function ASCIINoise(props: ASCIINoiseProps) {
     useEffect(() => {
         updateGridSize()
         window.addEventListener("resize", updateGridSize)
+
+        // Remove event listener on component unmount
+        return () => window.removeEventListener("resize", updateGridSize)
     }, [])
 
     return (
