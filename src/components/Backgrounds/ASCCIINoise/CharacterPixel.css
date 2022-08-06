@@ -1,7 +1,7 @@
 .character-pixel {
     font-size: var(--text-2);
-    color: var(--gray);
-    opacity: 15%;
+    color: var(--darker-gray);
+    /* opacity: 15%; */
     width: min-content;
     height: min-content;
     padding: var(--s1);
