@@ -1,6 +1,7 @@
 import "./Hero.css"
 
 import CharacterNoise from "../Backgrounds/CharacterNoise/CharacterNoise"
+import ContourNoise from "../Backgrounds/ContourNoise/ContourNoise"
 
 type HeroProps = {}
 
@@ -15,7 +16,8 @@ function Hero(props: HeroProps) {
     return (
         <div id="hero">
             <div id="hero-background">
-                <CharacterNoise />
+                {/* <CharacterNoise /> */}
+                <ContourNoise />
             </div>
 
             <p className="corner corner-top-left">╔═</p>

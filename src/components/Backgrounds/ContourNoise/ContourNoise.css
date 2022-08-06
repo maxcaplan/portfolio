@@ -1,0 +1,10 @@
+#contour-noise-wrapper {
+    width: 100%;
+    height: 100%;
+}
+
+#contour-noise-canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
