@@ -5,6 +5,8 @@ import "./CharacterNoise.css"
 import CharacterPixel from "./CharacterPixel"
 
 import { makeNoise3D } from "../../../utils/noise/perlin.js"
+// Get current time in milliseconds for noise seeding
+const Seed = new Date().getTime();
 
 type ASCIINoiseProps = {}
 
@@ -20,8 +22,8 @@ function ASCIINoise(props: ASCIINoiseProps) {
 
     const [noiseOffset, setNoiseOffset] = useState(0)
 
-    // Init perlin noise with current time as seed
-    const noise = makeNoise3D(42)
+    // Init perlin noise with seed
+    const noise = makeNoise3D(Seed)
 
     /** 
      * Returns a noise value for a 3d point at a set scale
