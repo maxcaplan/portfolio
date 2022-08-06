@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useLayoutEffect, useRef } from "react";
 
 import "./CharacterNoise.css"
 
@@ -82,8 +82,8 @@ function ASCIINoise(props: ASCIINoiseProps) {
         }
     }
 
-    // Component mount
-    useEffect(() => {
+    // Component did update
+    useLayoutEffect(() => {
         // Update grid size and add resize event
         updateGridSize()
         window.addEventListener("resize", updateGridSize)
