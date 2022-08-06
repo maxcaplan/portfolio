@@ -5,25 +5,25 @@ import "./ContourNoise.css"
 type ContourNoiseProps = {}
 
 const VertexShaderSource = `
-// an attribute will receive data from a buffer
 attribute vec4 a_position;
 
-// all shaders have a main function
 void main() {
-
-  // gl_Position is a special variable a vertex shader
-  // is responsible for setting
   gl_Position = a_position;
 }
 `;
 
 const FragmentShaderSource = `
 precision highp float;
-void main() {
-  // gl_FragColor is a special variable a fragment shader
-  // is responsible for setting
 
-  gl_FragColor = vec4(1, 0, 0.5, 1); // return reddish-purple
+uniform vec2 iResolution;
+uniform float iTime;
+uniform vec2 iMouse;
+
+void main() {
+    // gl_FragColor is a special variable a fragment shader
+    // is responsible for setting
+
+    gl_FragColor = vec4(fract((gl_FragCoord.xy - iMouse) / iResolution), fract(iTime), 1);
 }
 `;
 
@@ -45,6 +45,16 @@ function ContourNoise(props: ContourNoiseProps) {
     const [webGLProgram, setWebGLProgram] = useState<WebGLProgram>()
     const [webGLPositionAttributeLocation, setWebGLPositionAttributeLocation] = useState<number>()
     const [webGLPositionBuffer, setWebGLPositionBuffer] = useState<WebGLBuffer>()
+    const [webGLResolutionLocation, setWebGLResolutionLocation] = useState<WebGLUniformLocation>();
+    const [webGLTimeLocation, setWebGLTimeLocation] = useState<WebGLUniformLocation>();
+    const [webGLMouseLocation, setWebGLMouseLocation] = useState<WebGLUniformLocation>();
+
+    // Elapsed time state
+    const [timeDelta, setTimeDelta] = useState(0);
+
+    // Mouse state
+    const [mouseX, setMouseX] = useState(0);
+    const [mouseY, setMouseY] = useState(0);
 
     // WebGL initializing state
     const [webGLInitialized, setWebGLInitialized] = useState(false)
@@ -151,6 +161,16 @@ function ContourNoise(props: ContourNoiseProps) {
         const positionAttributeLocation = context.getAttribLocation(program, "a_position");
         setWebGLPositionAttributeLocation(positionAttributeLocation)
 
+        // look up uniform locations
+        const resolutionLocation = context.getUniformLocation(program, "iResolution");
+        const timeLocation = context.getUniformLocation(program, "iTime");
+        const mouseLocation = context.getUniformLocation(program, "iMouse");
+
+        if (!resolutionLocation || !timeLocation || !mouseLocation) return;
+        setWebGLResolutionLocation(resolutionLocation)
+        setWebGLTimeLocation(timeLocation)
+        setWebGLMouseLocation(mouseLocation)
+
         // Create a buffer to put three 2d clip space points in
         const positionBuffer = context.createBuffer();
         if (!positionBuffer) return;
@@ -171,7 +191,18 @@ function ContourNoise(props: ContourNoiseProps) {
 
         console.log("===== WebGL Init Done =====")
 
-        draw(context, program, positionAttributeLocation, positionBuffer)
+        draw(
+            context,
+            program,
+            positionAttributeLocation,
+            positionBuffer,
+            resolutionLocation,
+            timeLocation,
+            mouseLocation,
+            timeDelta,
+            mouseX,
+            mouseY
+        )
     }
 
     /** 
@@ -180,8 +211,33 @@ function ContourNoise(props: ContourNoiseProps) {
      * @param {WebGLProgram} program - Shader program used to render rectangle
      * @param {number} positionAttributeLocation - Location of vertex data
      * @param {WebGLBuffer} positionBuffer - Buffer for 2d clip space points
+     * @param {WebGLUniformLocation} resolutionLocation - Location for resolution
+     * * @param {WebGLUniformLocation} timeLocation - Location for time
+     * * @param {WebGLUniformLocation} mouseLocation - Location for mouse
     */
-    function draw(context: WebGLRenderingContext, program: WebGLProgram, positionAttributeLocation: number, positionBuffer: WebGLBuffer) {
+    function draw(
+        context?: WebGLRenderingContext,
+        program?: WebGLProgram,
+        positionAttributeLocation?: number,
+        positionBuffer?: WebGLBuffer,
+        resolutionLocation?: WebGLUniformLocation,
+        timeLocation?: WebGLUniformLocation,
+        mouseLocation?: WebGLUniformLocation,
+        t?: number,
+        mX?: number,
+        mY?: number,
+    ) {
+        if (
+            context == null ||
+            program == null ||
+            positionAttributeLocation == null ||
+            positionBuffer == null ||
+            resolutionLocation == null ||
+            timeLocation == null ||
+            mouseLocation == null
+        ) {
+            return
+        }
         // Tell WebGL how to convert from clip space to pixels
         context.viewport(0, 0, context.canvas.width, context.canvas.height);
 
@@ -203,6 +259,11 @@ function ContourNoise(props: ContourNoiseProps) {
             0,          // 0 = move forward size * sizeof(type) each iteration to get the next position
             0,          // start at the beginning of the buffer
         );
+
+        // Set uniforms
+        context.uniform2f(resolutionLocation, context.canvas.width, context.canvas.height);
+        context.uniform1f(timeLocation, t || 0);
+        context.uniform2f(mouseLocation, mX || 0, mY || 0);
 
         context.drawArrays(
             context.TRIANGLES,
@@ -238,6 +299,9 @@ function ContourNoise(props: ContourNoiseProps) {
             webGLProgram != null &&
             webGLPositionAttributeLocation != null &&
             webGLPositionBuffer != null &&
+            webGLResolutionLocation != null &&
+            webGLTimeLocation != null &&
+            webGLMouseLocation != null &&
             !webGLInitialized
         ) {
             // WebGL is Initialized if all WebGL state is truthy
@@ -250,29 +314,71 @@ function ContourNoise(props: ContourNoiseProps) {
         webGLProgram,
         webGLPositionAttributeLocation,
         webGLPositionBuffer,
-        webGLInitialized
+        webGLResolutionLocation,
+        webGLTimeLocation,
+        webGLMouseLocation,
     ])
 
-    // Add window resize event after WebGL Initialization
+    // On webGl initialized
     useEffect(() => {
+        let intervalId: number
         if (webGLInitialized) {
             window.addEventListener("resize", updateCanvasSize)
+
+            // Start updating time every 100 milliseconds
+            console.log("Start render loop")
+            let count = 0
+            intervalId = setInterval(() => {
+                count += 0.01;
+                setTimeDelta(count)
+            }, 10)
+        }
+
+        // Clean up
+        return () => {
+            if (intervalId != null) clearInterval(intervalId)
         }
     }, [webGLInitialized])
+
+    // Redraw canvas every time update
+    useEffect(() => {
+        if (
+            initCanvasSizeSet &&
+            webGLInitialized
+        ) {
+            draw(
+                gl,
+                webGLProgram,
+                webGLPositionAttributeLocation,
+                webGLPositionBuffer,
+                webGLResolutionLocation,
+                webGLTimeLocation,
+                webGLMouseLocation,
+                timeDelta,
+                mouseX,
+                mouseY
+            )
+        }
+    }, [timeDelta])
 
     // Redraw canvas on canvas size change
     useEffect(() => {
         if (
             initCanvasSizeSet &&
-            webGLInitialized &&
-            gl != null &&
-            webGLvertexShader != null &&
-            webGLfragmentShader != null &&
-            webGLProgram != null &&
-            webGLPositionAttributeLocation != null &&
-            webGLPositionBuffer != null
+            webGLInitialized
         ) {
-            draw(gl, webGLProgram, webGLPositionAttributeLocation, webGLPositionBuffer)
+            draw(
+                gl,
+                webGLProgram,
+                webGLPositionAttributeLocation,
+                webGLPositionBuffer,
+                webGLResolutionLocation,
+                webGLTimeLocation,
+                webGLMouseLocation,
+                timeDelta,
+                mouseX,
+                mouseY
+            )
         }
     }, [canvasWidth, canvasHeight])
 
