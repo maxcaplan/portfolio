@@ -1,6 +1,6 @@
 import "./Hero.css"
 
-import CharacterNoise from "../Backgrounds/ASCCIINoise/CharacterNoise"
+import CharacterNoise from "../Backgrounds/CharacterNoise/CharacterNoise"
 
 type HeroProps = {}
 
