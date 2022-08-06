@@ -3,10 +3,12 @@
    ========================================================================== */
 
 :root {
-    /* color vars */
+    /* colour vars */
     --black: #121212;
     --white: #fff;
     --gray: #757575;
+    --gray-dark: #424242;
+    --gray-darker: #212121;
     --red: #FE938C;
     --orange: #FABC2A;
     --yellow: #FFF275;

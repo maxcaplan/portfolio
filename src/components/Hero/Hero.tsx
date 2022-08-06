@@ -1,17 +1,23 @@
 import "./Hero.css"
 
+import CharacterNoise from "../Backgrounds/CharacterNoise/CharacterNoise"
+
 type HeroProps = {}
 
-export function Hero(props: HeroProps) {
+function Hero(props: HeroProps) {
     // Splits each character of input string into individual spans
     const spanify = (text: string) => {
-        return text.split("").map(char => {
-            return <span>{char}</span>
+        return text.split("").map((char, i) => {
+            return <span key={i}>{char}</span>
         })
     }
 
     return (
         <div id="hero">
+            <div id="hero-background">
+                <CharacterNoise />
+            </div>
+
             <p className="corner corner-top-left">╔═</p>
             <p className="corner corner-top-right">═╗</p>
             <p className="corner corner-bottom-left">╚═</p>
@@ -37,3 +43,5 @@ export function Hero(props: HeroProps) {
         </div>
     )
 }
+
+export default Hero;
