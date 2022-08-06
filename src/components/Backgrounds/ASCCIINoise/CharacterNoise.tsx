@@ -21,9 +21,10 @@ function ASCIINoise(props: ASCIINoiseProps) {
     const [noiseOffset, setNoiseOffset] = useState(0)
 
     // Init perlin noise with current time as seed
-    const noise = makeNoise3D(new Date().getTime())
+    const noise = makeNoise3D(42)
 
-    /** Returns a noise value for a 3d point at a set scale
+    /** 
+     * Returns a noise value for a 3d point at a set scale
      * @param {number} x - x position
      * @param {number} y - y position
      * @param {number} z - z position
@@ -57,7 +58,7 @@ function ASCIINoise(props: ASCIINoiseProps) {
         for (let y = 0; y < rows; y++) {
             const row: number[] = []
             for (let x = 0; x < cols; x++) {
-                row.push(calcNoise(x, y, noiseOffset, 0.25))
+                row.push(calcNoise(x, y, noiseOffset, 0.1))
             }
             grid.push(row)
         }
@@ -65,14 +66,46 @@ function ASCIINoise(props: ASCIINoiseProps) {
         setValueGrid(grid)
     }
 
-    // Update grid size on component mount and add resize event
+    // Updates the value of each cell in grid
+    function updateGrid() {
+        if (valueGrid.length > 0 && valueGrid[0].length > 0) {
+            const grid = []
+            for (let y = 0; y < valueGrid.length; y++) {
+                const row = []
+                for (let x = 0; x < valueGrid[0].length; x++) {
+                    row.push(calcNoise(x, y, noiseOffset, 0.1))
+                }
+                grid.push(row)
+            }
+
+            setValueGrid(grid)
+        }
+    }
+
+    // Component mount
     useEffect(() => {
+        // Update grid size and add resize event
         updateGridSize()
         window.addEventListener("resize", updateGridSize)
 
-        // Remove event listener on component unmount
-        return () => window.removeEventListener("resize", updateGridSize)
+        // start updating noise Z offset at set intervels
+        let count = 0
+        const offsetIntervalID = setInterval(() => {
+            count += 1
+            setNoiseOffset(count)
+        }, 100)
+
+        // Cleanup function
+        return () => {
+            // Clear offset interval funciton
+            clearInterval(offsetIntervalID)
+            // Remove resize listener
+            window.removeEventListener("resize", updateGridSize)
+        }
     }, [])
+
+    // Update 
+    useEffect(updateGrid, [noiseOffset])
 
     return (
         <div id="container" ref={containerRef}>
