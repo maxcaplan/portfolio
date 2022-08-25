@@ -15,7 +15,7 @@ function Hero(props: HeroProps) {
     return (
         <div id="hero">
             <div id="hero-background">
-                <CharacterNoise />
+                <CharacterNoise animationSpeed={5} />
             </div>
 
             <p className="corner corner-top-left">╔═</p>

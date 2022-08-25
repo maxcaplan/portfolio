@@ -8,10 +8,15 @@ import { makeNoise3D } from "../../../utils/noise/perlin.js"
 // Get current time in milliseconds for noise seeding
 const Seed = new Date().getTime();
 
-type ASCIINoiseProps = {}
+type ASCIINoiseProps = {
+    animationSpeed?: number
+}
 
-/** Renders perlin noise with a grid of text characters */
-function ASCIINoise(props: ASCIINoiseProps) {
+/** 
+ * Renders perlin noise with a grid of text characters 
+ * @param {Boolean} [animationSpeed=1] - The speed of the animation
+ * */
+function ASCIINoise({ animationSpeed = 1 }: ASCIINoiseProps) {
     // Refrence for container element
     const containerRef = useRef<HTMLDivElement>(null)
     // Refrence for character pixel element
@@ -60,7 +65,7 @@ function ASCIINoise(props: ASCIINoiseProps) {
         for (let y = 0; y < rows; y++) {
             const row: number[] = []
             for (let x = 0; x < cols; x++) {
-                row.push(calcNoise(x, y, noiseOffset, 0.1))
+                row.push(calcNoise(x, y, noiseOffset * animationSpeed, 0.1))
             }
             grid.push(row)
         }
@@ -68,20 +73,31 @@ function ASCIINoise(props: ASCIINoiseProps) {
         setValueGrid(grid)
     }
 
-    // Updates the value of each cell in grid
+    /** Updates the value of each cell in grid */
     function updateGrid() {
         if (valueGrid.length > 0 && valueGrid[0].length > 0) {
             const grid = []
             for (let y = 0; y < valueGrid.length; y++) {
                 const row = []
                 for (let x = 0; x < valueGrid[0].length; x++) {
-                    row.push(calcNoise(x, y, noiseOffset, 0.1))
+                    row.push(calcNoise(x, y, noiseOffset * animationSpeed, 0.1))
                 }
                 grid.push(row)
             }
 
             setValueGrid(grid)
         }
+    }
+
+    /** Animates perlin noise Z axis offset */
+    function animate(timestamp: number, prevTimestamp: number, count: number) {
+        // Calculate time between current and previous frame
+        const deltaTime = (timestamp - prevTimestamp) / 1000
+        // Update noise z offset
+        const newCount = (count + (1 * deltaTime))
+        setNoiseOffset(newCount)
+        // Request next frame
+        window.requestAnimationFrame(t => animate(t, timestamp, newCount))
     }
 
     // Component did update
@@ -91,16 +107,18 @@ function ASCIINoise(props: ASCIINoiseProps) {
         window.addEventListener("resize", updateGridSize)
 
         // start updating noise Z offset at set intervels
-        let count = 0
-        const offsetIntervalID = setInterval(() => {
-            count += 1
-            setNoiseOffset(count)
-        }, 100)
+        // let offsetIntervalID: number;
+        // if (animated) {
+        //     let count = 0
+        //     offsetIntervalID = setInterval(draw(count), 100)
+        // }
+
+        window.requestAnimationFrame(t => animate(t, t, 0))
 
         // Cleanup function
         return () => {
             // Clear offset interval funciton
-            clearInterval(offsetIntervalID)
+            // if (animated) clearInterval(offsetIntervalID)
             // Remove resize listener
             window.removeEventListener("resize", updateGridSize)
         }
