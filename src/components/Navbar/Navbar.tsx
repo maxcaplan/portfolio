@@ -70,7 +70,7 @@ export function Navbar(props: NavbarProps) {
   };
 
   return (
-    <div id="navbar" className="absolute left-0 top-0 w-full z-50">
+    <div id="navbar" className="z-50 absolute left-0 top-0 w-full">
       <div
         id="navbar-container"
         className="w-full h-full max-w-7xl mx-auto p-4 flex flex-row items-center"
