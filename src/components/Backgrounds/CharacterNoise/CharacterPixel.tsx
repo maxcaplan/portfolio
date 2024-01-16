@@ -26,16 +26,21 @@ const CharacterPixel = forwardRef(
       setCharacterIndex(i);
     }
 
-    const hidden_classes = props.hidden ? "hidden absolute" : "";
+    const hidden_classes = props.hidden ? "invisible absolute" : "";
 
     // Update character index on brightness change
     useEffect(updateCharacterIndex, [props.brightness]);
 
     return (
-      <div className="inline-block size-fit p-1">
+      <div className={`inline-block size-fit p-1 ${hidden_classes}`}>
         <span
           ref={ref}
-          className={`inline-block text-5xl leading-normal text-brand-gray-800 ${hidden_classes} ${props.className}`}
+          className={`
+		  inline-block 
+		  text-5xl 
+		  leading-normal 
+		  text-brand-gray-800 
+		  ${props.className}`}
         >
           {props.characters[characterIndex]}
         </span>

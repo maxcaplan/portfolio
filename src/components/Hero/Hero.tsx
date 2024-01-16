@@ -6,48 +6,38 @@ type HeroProps = {};
 const noise_seed = Date.now();
 
 function Hero(props: HeroProps) {
-  /** Splits each character of input string into individual spans */
-  const spanify = (text: string) => {
-    return text.split("").map((char, i) => {
-      return <span key={i}>{char}</span>;
-    });
-  };
-
+  const comment_pref = [
+    <span className="hidden sm:inline">&lt;!--</span>,
+    <span className="sm:hidden">//</span>,
+  ];
+  const comment_suf = <span className="hidden sm:inline">--&gt;</span>;
   return (
     <div
       id="hero"
-      className="w-screen h-screen max-w-full max-h-full bg-brand-gray-900"
+      className="z-0 w-screen h-screen max-w-full max-h-full bg-brand-gray-900"
     >
       <div
         id="hero-background"
-        className="absolute top-0 left-0 w-full h-full pointer-events-none"
+        className="z-0 absolute top-0 left-0 w-full h-full pointer-events-none"
       >
-        <CharacterPixel
-          characters={["\u00A0", "\u00A0", "░", "▒", "▓", "▓"]}
-          brightness={1}
-        />
-        {/*<CharacterNoise animationSpeed={5} seed={noise_seed} />*/}
+        <CharacterNoise animationSpeed={5} seed={noise_seed} />
       </div>
-
-      {/*<p className="corner corner-top-left">╔═</p>
-			<p className="corner corner-top-right">═╗</p>
-			<p className="corner corner-bottom-left">╚═</p>
-			<p className="corner corner-bottom-right">═╝</p>*/}
 
       <div
         id="hero-container"
-        className="flex items-end w-full h-full max-w-7xl mx-auto px-4 pt-4 pb-32"
+        className="z-10 flex items-end w-full h-full max-w-7xl mx-auto px-4 pt-4 pb-32"
       >
-        <div id="hero-text" className="flex flex-col">
-          <h6 className="text-xl italic text-brand-gray-300 leading-normal">
-            &lt;!-- I like to make things --&gt;
+        <div id="hero-text" className="z-10 flex flex-col">
+          <h6 className="text-base sm:text-xl italic text-brand-gray-300 leading-normal">
+            {comment_pref} I like to make things {comment_suf}
           </h6>
 
-          <h1 className="text-8xl font-bold leading-normal">DEVELOPER</h1>
-          {/*<h1 className="hero-title-sm">&lt;/DEV&gt;</h1>*/}
+          <h1 className="text-5xl leading-normal sm:text-8xl sm:leading-normal font-bold">
+            DEVELOPER
+          </h1>
 
-          <h6 className="text-xl italic text-brand-gray-400 leading-normal">
-            &lt;!-- And I like to make them{" "}
+          <h6 className="text-base sm:text-xl italic text-brand-gray-400 leading-normal">
+            {comment_pref} And I like to make them{" "}
             {[
               { char: "g", hover: "purple" },
               { char: "o", hover: "green" },
@@ -63,11 +53,12 @@ function Hero(props: HeroProps) {
                 </span>
               );
             })}{" "}
-            --&gt;
+            {comment_suf}
           </h6>
 
-          <h1 className="text-8xl font-bold leading-normal">DESIGNER</h1>
-          {/*<h1 className="hero-title-sm">&lt;/DES&gt;</h1>*/}
+          <h1 className="text-5xl leading-normal sm:text-8xl sm:leading-normal font-bold">
+            DESIGNER
+          </h1>
         </div>
       </div>
     </div>
