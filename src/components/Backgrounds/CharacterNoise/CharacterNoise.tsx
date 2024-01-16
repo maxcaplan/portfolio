@@ -6,6 +6,7 @@ import { makeNoise3D } from "../../../utils/noise/perlin.js";
 
 type ASCIINoiseProps = {
   animationSpeed?: number;
+  frameRate?: number;
   seed?: number;
 };
 
@@ -13,7 +14,11 @@ type ASCIINoiseProps = {
  * Renders perlin noise with a grid of text characters
  * @param {Boolean} [animationSpeed=1] - The speed of the animation
  * */
-function ASCIINoise({ animationSpeed = 1, seed = 0 }: ASCIINoiseProps) {
+function ASCIINoise({
+  animationSpeed = 1,
+  frameRate = 12,
+  seed = 0,
+}: ASCIINoiseProps) {
   // Refrence for container element
   const containerRef = useRef<HTMLDivElement>(null);
   // Refrence for character pixel element
@@ -101,7 +106,9 @@ function ASCIINoise({ animationSpeed = 1, seed = 0 }: ASCIINoiseProps) {
     const newCount = count + 1 * deltaTime;
     setNoiseOffset(newCount);
     // Request next frame
-    window.requestAnimationFrame((t) => animate(t, timestamp, newCount));
+    setTimeout(() => {
+      window.requestAnimationFrame((t) => animate(t, timestamp, newCount));
+    }, 1000 / frameRate);
   }
 
   // Component did update
