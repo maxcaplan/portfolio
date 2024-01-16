@@ -39,7 +39,7 @@ const CharacterPixel = forwardRef(
 		  inline-block 
 		  text-5xl 
 		  leading-normal 
-		  text-brand-gray-800 
+		  text-brand-gray-700 
 		  ${props.className}`}
         >
           {props.characters[characterIndex]}

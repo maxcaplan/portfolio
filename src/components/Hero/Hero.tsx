@@ -1,20 +1,40 @@
 import CharacterNoise from "../Backgrounds/CharacterNoise/CharacterNoise";
-import CharacterPixel from "../Backgrounds/CharacterNoise/CharacterPixel";
+import Navbar from "../Navbar/Navbar";
 
 type HeroProps = {};
 
 const noise_seed = Date.now();
 
-function Hero(props: HeroProps) {
-  const comment_pref = [
-    <span className="hidden sm:inline">&lt;!--</span>,
-    <span className="sm:hidden">//</span>,
-  ];
-  const comment_suf = <span className="hidden sm:inline">--&gt;</span>;
+function Hero(_props: HeroProps) {
+  const good = () => {
+    const characters = [
+      { char: "g", hover: "hover:text-brand-purple" },
+      { char: "o", hover: "hover:text-brand-green" },
+      { char: "o", hover: "hover:text-brand-red" },
+      { char: "d", hover: "hover:text-brand-blue" },
+    ];
+
+    return characters.map(({ char, hover }, idx) => {
+      return (
+        <span
+          key={idx}
+          className={`
+		  transition 
+		  [&:not(:hover)]:duration-500 
+		  cursor-pointer 
+		  font-bold 
+		  ${hover}`}
+        >
+          {char}
+        </span>
+      );
+    });
+  };
+
   return (
     <div
       id="hero"
-      className="z-0 w-screen h-screen max-w-full max-h-full bg-brand-gray-900"
+      className="z-0 relative w-full h-screen max-h-full bg-brand-gray-800"
     >
       <div
         id="hero-background"
@@ -23,42 +43,26 @@ function Hero(props: HeroProps) {
         <CharacterNoise animationSpeed={5} seed={noise_seed} />
       </div>
 
-      <div
-        id="hero-container"
-        className="z-10 flex items-end w-full h-full max-w-7xl mx-auto px-4 pt-4 pb-32"
-      >
-        <div id="hero-text" className="z-10 flex flex-col">
-          <h6 className="text-base sm:text-xl italic text-brand-gray-300 leading-normal">
-            {comment_pref} I like to make things {comment_suf}
-          </h6>
+      <div id="hero-container" className="z-10 flex flex-col w-full h-full p-6">
+        <Navbar />
+        <div id="hero-text" className="z-10 flex-grow flex items-center">
+          <div className="flex flex-col">
+            <h6 className="text-base md:text-xl italic text-brand-gray-300 leading-normal">
+              // I like to make things
+            </h6>
 
-          <h1 className="text-5xl leading-normal sm:text-8xl sm:leading-normal font-bold">
-            DEVELOPER
-          </h1>
+            <h1 className="text-5xl leading-normal sm:text-7xl sm:leading-normal font-extrabold">
+              DEVELOPER
+            </h1>
 
-          <h6 className="text-base sm:text-xl italic text-brand-gray-400 leading-normal">
-            {comment_pref} And I like to make them{" "}
-            {[
-              { char: "g", hover: "purple" },
-              { char: "o", hover: "green" },
-              { char: "o", hover: "red" },
-              { char: "d", hover: "blue" },
-            ].map(({ char, hover }, idx) => {
-              return (
-                <span
-                  key={idx}
-                  className={`cursor-pointer font-bold hover:text-brand-${hover}`}
-                >
-                  {char}
-                </span>
-              );
-            })}{" "}
-            {comment_suf}
-          </h6>
+            <h6 className="text-base md:text-xl italic text-brand-gray-400 leading-normal">
+              // And I like to make them {good()}
+            </h6>
 
-          <h1 className="text-5xl leading-normal sm:text-8xl sm:leading-normal font-bold">
-            DESIGNER
-          </h1>
+            <h1 className="text-5xl leading-normal sm:text-7xl sm:leading-normal font-extrabold">
+              DESIGNER
+            </h1>
+          </div>
         </div>
       </div>
     </div>
