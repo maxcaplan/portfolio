@@ -1,4 +1,5 @@
 import CharacterNoise from "../Backgrounds/CharacterNoise/CharacterNoise";
+import Footer from "../Footer/Footer";
 import Navbar from "../Navbar/Navbar";
 
 type HeroProps = {};
@@ -64,6 +65,7 @@ function Hero(_props: HeroProps) {
             </h1>
           </div>
         </div>
+        <Footer />
       </div>
     </div>
   );
