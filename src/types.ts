@@ -17,4 +17,6 @@ export enum Skill {
   vue,
   node,
   firebase,
+  ruby,
+  tailwind,
 }

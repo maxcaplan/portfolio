@@ -9,61 +9,6 @@
 }
 
 /* ==========================================================================
-   Variables
-   ========================================================================== */
-
-.beepbeepboop {
-  /* colour vars */
-  --black: #121212;
-  --white: #fff;
-  --gray: #757575;
-  --gray-dark: #424242;
-  --gray-darker: #212121;
-  --red: #fe938c;
-  --orange: #fabc2a;
-  --yellow: #fff275;
-  --green: #ddf597;
-  --blue: #7cc6fe;
-  --teal: #76e7cd;
-  --purple: #9d79bc;
-
-  /* text size vars */
-  --text-1: 3.75rem;
-  --text-2: 3rem;
-  --text-3: 2.25rem;
-  --text-4: 1.875rem;
-  --text-5: 1.5rem;
-  --text-6: 1.25rem;
-
-  /* spacing vars */
-  --s1: 0.25rem;
-  --s2: 0.5rem;
-  --s3: 0.75rem;
-  --s4: 1rem;
-  --s5: 1.25rem;
-  --s6: 1.5rem;
-  --s7: 1.75rem;
-  --s8: 2rem;
-  --s9: 2.25rem;
-  --s10: 2.5rem;
-  --s11: 2.75rem;
-  --s12: 3rem;
-  --s14: 3.5rem;
-  --s16: 4rem;
-  --s20: 5rem;
-  --s24: 6rem;
-  --s28: 7rem;
-  --s32: 8rem;
-
-  /* breakpoint vars */
-  --sm: 640px;
-  --md: 768px;
-  --lg: 1024px;
-  --xl: 1280px;
-  --xxl: 1536px;
-}
-
-/* ==========================================================================
    JetBrains Mono Font Face
    ========================================================================== */
 /* Regular */

@@ -80,13 +80,25 @@ const WorkCard: FunctionComponent<WorkCardProps> = (props) => {
 		h-full 
 		border 
 		border-brand-gray-400 
+		bg-brand-gray-950
 		rounded
 		transition
 		duration-200
 		`}
         ></div>
 
-        <div className="aspect-[16/9] xl:aspect-auto w-full h-full overflow-hidden rounded">
+        <div
+          className={`
+		aspect-[16/9] 
+		xl:aspect-auto 
+		w-full 
+		h-full 
+		overflow-hidden 
+		border
+		border-brand-gray-400
+		rounded
+		`}
+        >
           <img
             src={props.image}
             alt="work image"

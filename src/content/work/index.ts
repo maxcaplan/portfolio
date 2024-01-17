@@ -1,7 +1,7 @@
 // Works
 import { Work } from "../../types";
-import TestWork from "./test";
+import ConnorBell from "./ConnorBell/";
 
-const Works: Work[] = [TestWork];
+const Works: Work[] = [ConnorBell];
 
 export default Works;

@@ -25,7 +25,7 @@ export default function Work() {
         </h2>
 
         <div className="relative z-50 flex flex-col w-full gap-12">
-          {Works.map((work) => {
+          {Works.map((work, idx) => {
             return (
               <WorkCard
                 title={work.title}
@@ -33,6 +33,7 @@ export default function Work() {
                 description={work.description}
                 skills={work.skills}
                 image={work.image}
+                flipped={idx % 2 == 1}
               />
             );
           })}
