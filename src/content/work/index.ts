@@ -1,7 +1,9 @@
-// Works
 import { Work } from "../../types";
-import ConnorBell from "./ConnorBell/";
 
-const Works: Work[] = [ConnorBell];
+// Works
+import ConnorBell from "./ConnorBell/";
+import GoodGoods from "./GoodGoods";
+
+const Works: Work[] = [ConnorBell, GoodGoods];
 
 export default Works;

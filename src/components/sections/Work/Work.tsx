@@ -17,14 +17,14 @@ export default function Work() {
         id="work-content"
         className="z-50 relative w-full max-w-4xl mx-auto px-6"
       >
-        <h2 className="text-3xl font-bold mb-12">
+        <h2 className="text-3xl font-bold mb-20">
           1.{" "}
           <span className="decoration-brand-purple decoration-wavy decoration-2 underline">
             work
           </span>
         </h2>
 
-        <div className="relative z-50 flex flex-col w-full gap-12">
+        <div className="relative z-50 flex flex-col w-full gap-28">
           {Works.map((work, idx) => {
             return (
               <WorkCard
