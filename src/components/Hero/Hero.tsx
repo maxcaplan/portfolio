@@ -2,11 +2,13 @@ import CharacterNoise from "../Backgrounds/CharacterNoise/CharacterNoise";
 import Footer from "../Footer/Footer";
 import Navbar from "../Navbar/Navbar";
 
-type HeroProps = {};
+type HeroProps = {
+  className?: string;
+};
 
 const noise_seed = Date.now();
 
-function Hero(_props: HeroProps) {
+function Hero(props: HeroProps) {
   const good = () => {
     const characters = [
       { char: "g", hover: "hover:text-brand-purple" },
@@ -35,7 +37,9 @@ function Hero(_props: HeroProps) {
   return (
     <div
       id="hero"
-      className="z-0 relative w-full h-screen max-h-full bg-brand-gray-800"
+      className={`z-0 relative w-full h-screen max-h-full bg-brand-gray-800 ${
+        props.className || ""
+      }`}
     >
       <div
         id="hero-background"

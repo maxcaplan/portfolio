@@ -75,13 +75,13 @@ export function Navbar(props: NavbarProps) {
           src={logoDark}
           alt="logo"
           id="navbar-logo"
-          className="hidden md:flex self-stretch h-10"
+          className="hidden md:flex self-stretch h-8"
         />
         <img
           src={logoSmDark}
           alt="logo"
           id="navbar-logo-sm"
-          className="flex md:hidden self-stretch h-10"
+          className="flex md:hidden self-stretch h-8"
         />
 
         <div id="navbar-right" className="w-full flex flex-row justify-end">
