@@ -9,7 +9,7 @@ const ConnorBell: Work = {
   },
   description: description,
   skills: [Skill.ruby, Skill.javascript, Skill.tailwind],
-  image: `/assets/images/works/connor_bell/connor_bell_cover.png`,
+  image: `/assets/images/works/connor_bell/connor_bell_cover.webp`,
 };
 
 export default ConnorBell;
