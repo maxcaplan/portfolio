@@ -106,7 +106,7 @@ export default function SkillIcon(props: SkillIconProps) {
       target={icons[props.skill].href ? "_blank" : undefined}
       title={icons[props.skill].name}
       className={`
-	  group
+	  group/skill
 	  relative
 	  flex 
 	  items-center 
@@ -125,7 +125,7 @@ export default function SkillIcon(props: SkillIconProps) {
 	  left-1/2 
 	  -translate-x-1/2
 	  hidden
-	  group-hover:inline
+	  group-hover/skill:inline
 	  `}
       >
         <span

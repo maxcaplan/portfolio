@@ -14,10 +14,32 @@ const WorkCard: FunctionComponent<WorkCardProps> = (props) => {
   const image_flip_classes = props.flipped
     ? "col-start-2 col-end-4"
     : "col-span-2";
+
   return (
-    <div className="flex flex-col md:grid grid-cols-3 grid-rows-7 grid-flow-row gap-x-6 gap-y-4 w-full">
+    <div
+      className={`
+	group/card
+	flex 
+	flex-col 
+	md:grid 
+	grid-cols-3 
+	grid-rows-7 
+	grid-flow-row 
+	gap-x-6 
+	gap-y-4 
+	w-full
+	`}
+    >
       <div
-        className={`${image_flip_classes} row-span-7 relative mb-2 md:mb-0 bg-brand-gray-800 rounded`}
+        className={`
+		${image_flip_classes} 
+		row-span-7 
+		relative 
+		mb-2 
+		md:mb-0 
+		bg-brand-gray-800 
+		rounded
+		`}
       >
         <div
           className={`
@@ -27,18 +49,23 @@ const WorkCard: FunctionComponent<WorkCardProps> = (props) => {
 		-left-2
 		xl:-bottom-4 
 		xl:-left-4 
+		xl:group-hover/card:-translate-x-2
+		xl:group-hover/card:translate-y-2
 		w-full 
 		h-full 
 		border 
 		border-brand-gray-400 
-		rounded`}
+		rounded
+		transition
+		duration-200
+		`}
         ></div>
 
         <div className="aspect-[16/9] xl:aspect-auto w-full h-full overflow-hidden rounded">
           <img
             src={props.image}
             alt="work image"
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover group-hover/card:scale-105 transition duration-200"
           />
         </div>
       </div>
