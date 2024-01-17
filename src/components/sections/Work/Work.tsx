@@ -1,6 +1,7 @@
 import BackgroundText from "./BackgroundText";
-import { Skill } from "./SkillIcon";
 import WorkCard from "./WorkCard";
+
+import Works from "../../../content/work";
 
 export default function Work() {
   return (
@@ -24,54 +25,17 @@ export default function Work() {
         </h2>
 
         <div className="relative z-50 flex flex-col w-full gap-12">
-          <WorkCard
-            title="Test Work"
-            description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-            date="01/2024"
-            skills={[
-              Skill.javascript,
-              Skill.react,
-              Skill.vue,
-              Skill.node,
-              Skill.firebase,
-            ]}
-            image={`https://picsum.photos/seed/${Math.round(
-              Math.random() * 100,
-            )}/1920/1080`}
-            flipped={false}
-          />
-          <WorkCard
-            title="Test Work 2"
-            description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-            date="01/2024"
-            skills={[
-              Skill.javascript,
-              Skill.react,
-              Skill.vue,
-              Skill.node,
-              Skill.firebase,
-            ]}
-            image={`https://picsum.photos/seed/${Math.round(
-              Math.random() * 100,
-            )}/1920/1080`}
-            flipped={true}
-          />
-          <WorkCard
-            title="Test Work 3"
-            description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-            date="01/2024"
-            skills={[
-              Skill.javascript,
-              Skill.react,
-              Skill.vue,
-              Skill.node,
-              Skill.firebase,
-            ]}
-            image={`https://picsum.photos/seed/${Math.round(
-              Math.random() * 100,
-            )}/1920/1080`}
-            flipped={false}
-          />
+          {Works.map((work) => {
+            return (
+              <WorkCard
+                title={work.title}
+                date={work.date}
+                description={work.description}
+                skills={work.skills}
+                image={work.image}
+              />
+            );
+          })}
         </div>
       </div>
     </div>

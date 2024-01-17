@@ -1,13 +1,7 @@
+import { Skill } from "../../../types";
+
 interface SkillIconProps {
   skill: Skill;
-}
-
-export enum Skill {
-  javascript,
-  react,
-  vue,
-  node,
-  firebase,
 }
 
 export default function SkillIcon(props: SkillIconProps) {

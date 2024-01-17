@@ -1,12 +1,10 @@
 import { FunctionComponent } from "react";
-import SkillIcon, { Skill } from "./SkillIcon";
+import { Work } from "../../../types";
+import SkillIcon from "./SkillIcon";
 
-interface WorkCardProps {
-  title: string;
-  description: string;
-  date: string;
-  image: string;
-  skills?: Skill[];
+import { Converter } from "showdown";
+
+interface WorkCardProps extends Work {
   flipped?: boolean;
 }
 
@@ -14,6 +12,33 @@ const WorkCard: FunctionComponent<WorkCardProps> = (props) => {
   const image_flip_classes = props.flipped
     ? "col-start-2 col-end-4"
     : "col-span-2";
+
+  /** Adds a leading zero to posotive input number if it has less than 2 digits */
+  const leading_zero = (num: number): string => {
+    return `${Math.abs(num) < 10 ? "0" : ""}${Math.abs(num)}`;
+  };
+
+  const markdown_to_txt = (markdown: string): string => {
+    const converter = new Converter();
+    const html_str = `<div>${converter.makeHtml(markdown)}</div>`;
+
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(html_str, "text/xml");
+
+    const walker = document.createTreeWalker(doc, NodeFilter.SHOW_TEXT);
+
+    const text: string[] = [];
+    let current_node: Node | null = walker.currentNode;
+
+    while (current_node) {
+      if (current_node && current_node.textContent)
+        text.push(current_node.textContent);
+
+      current_node = walker.nextNode();
+    }
+
+    return text.join(" ");
+  };
 
   return (
     <div
@@ -75,11 +100,13 @@ const WorkCard: FunctionComponent<WorkCardProps> = (props) => {
       </h3>
 
       <h4 className="col-span-1 row-span-1 text-xl text-brand-gray-300">
-        {props.date}
+        {leading_zero(props.date.month)}/{props.date.year}
       </h4>
 
       <div className="col-span-1 row-span-2">
-        <p className="max-h-full font-sans line-clamp-3">{props.description}</p>
+        <p className="max-h-full font-sans line-clamp-3">
+          {markdown_to_txt(props.description)}
+        </p>
       </div>
 
       <div className="col-span-1 row-span-1 flex flex-row gap-2">
