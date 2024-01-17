@@ -9,7 +9,7 @@ export default function Work() {
         id="work-background"
         className="z-0 absolute top-0 left-0 flex justify-end w-full h-full p-4"
       >
-        <BackgroundText className="w-1/2" />
+        <BackgroundText className="w-2/3 xl:w-1/2" />
       </div>
 
       <div

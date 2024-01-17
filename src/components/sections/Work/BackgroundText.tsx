@@ -1,5 +1,6 @@
 import { RefObject, useLayoutEffect, useRef, useState } from "react";
-import WorkText from "../../../assets/sections/work/work_bg_text.svg";
+
+import WorkText from "./WorkText";
 
 interface BackgroundTextProps {
   className?: string;
@@ -9,50 +10,49 @@ export default function BackgroundText(props: BackgroundTextProps) {
   const [word_steps, set_word_steps] = useState(0);
 
   const container_ref = useRef<HTMLDivElement>(null);
-  const text_ref = useRef<HTMLImageElement>(null);
+  const svg_ref = useRef<SVGSVGElement>(null);
 
   const calc_trans_steps = (
     container_ref: RefObject<HTMLDivElement>,
-    text_ref: RefObject<HTMLImageElement>,
+    svg_ref: RefObject<SVGSVGElement>,
   ): number => {
-    if (text_ref.current == null) return 0;
+    if (svg_ref.current == null) return 0;
     if (container_ref.current == null) return 0;
 
-    if (text_ref.current.clientHeight == 0) return 0;
+    if (svg_ref.current.clientHeight == 0) return 0;
     if (container_ref.current.clientHeight == 0) return 0;
 
-    const container_height = container_ref.current?.clientHeight;
-    const text_height = text_ref.current.clientHeight;
+    const container_height = container_ref.current.clientHeight;
+    const svg_height = svg_ref.current.clientHeight;
+
+    const svg_step_size_mult = window.innerWidth > 896 ? 0.25 : 0.5;
 
     const steps = Math.floor(
-      (container_height - text_height) / (text_height * 0.25),
+      (container_height - svg_height) / (svg_height * svg_step_size_mult),
     );
 
     return steps;
   };
 
-  const repeat_img = (
-    src: string,
+  const repeat_text = (
     steps: number,
     container_ref: RefObject<HTMLDivElement>,
-    text_ref: RefObject<HTMLImageElement>,
+    svg_ref: RefObject<SVGSVGElement>,
   ): JSX.Element[] | undefined => {
-    if (text_ref.current == null) return;
+    if (svg_ref.current == null) return;
     if (container_ref.current == null) return;
 
     const container_height = container_ref.current.clientHeight;
-    const text_height = text_ref.current.clientHeight;
-    const step_size = (container_height - text_height) / steps;
+    const svg_height = svg_ref.current.clientHeight;
+    const step_size = (container_height - svg_height) / steps;
 
-    const imgs: JSX.Element[] = [];
+    const svgs: JSX.Element[] = [];
 
     for (let i = 0; i < steps; i++) {
-      imgs.push(
-        <img
-          id={`${i}`}
+      svgs.push(
+        <WorkText
           key={i}
-          src={src}
-          className="absolute left-0 w-full"
+          className="absolute left-0 w-full h-fit"
           style={{
             bottom: `${step_size * (i + 1)}px`,
           }}
@@ -60,17 +60,18 @@ export default function BackgroundText(props: BackgroundTextProps) {
       );
     }
 
-    return imgs;
+    return svgs;
   };
 
   const handle_resize = () => {
-    const steps = calc_trans_steps(container_ref, text_ref);
+    const steps = calc_trans_steps(container_ref, svg_ref);
+    console.log(steps);
     set_word_steps(steps);
   };
 
   // On component did update
   useLayoutEffect(() => {
-    calc_trans_steps(container_ref, text_ref);
+    handle_resize();
     // Attach resize event
     window.onresize = handle_resize;
 
@@ -85,15 +86,11 @@ export default function BackgroundText(props: BackgroundTextProps) {
       ref={container_ref}
       className={`relative flex flex-col-reverse ${props.className || ""}`}
     >
-      <img
-        src={WorkText}
-        ref={text_ref}
-        onLoad={() => {
-          handle_resize();
-        }}
-        className="absolute bottom-0 left-0 w-full"
+      <WorkText
+        ref={svg_ref}
+        className="absolute bottom-0 left-0 w-full h-fit"
       />
-      {repeat_img(WorkText, word_steps, container_ref, text_ref)}
+      {repeat_text(word_steps, container_ref, svg_ref)}
     </div>
   );
 }

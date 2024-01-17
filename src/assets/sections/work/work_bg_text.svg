@@ -7,35 +7,11 @@
    viewBox="0 0 168.33184 52.210435"
    version="1.1"
    id="svg979"
-   inkscape:version="1.3 (0e150ed6c4, 2023-07-21)"
-   sodipodi:docname="work_bg_text.svg"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:cc="http://creativecommons.org/ns#"
    xmlns:dc="http://purl.org/dc/elements/1.1/">
-  <sodipodi:namedview
-     id="namedview981"
-     pagecolor="#353535"
-     bordercolor="#000000"
-     borderopacity="0.25"
-     inkscape:showpageshadow="2"
-     inkscape:pageopacity="0"
-     inkscape:pagecheckerboard="0"
-     inkscape:deskcolor="#1e1e1e"
-     inkscape:document-units="mm"
-     showgrid="false"
-     inkscape:zoom="1.239"
-     inkscape:cx="413.23648"
-     inkscape:cy="245.76271"
-     inkscape:window-width="2560"
-     inkscape:window-height="1521"
-     inkscape:window-x="0"
-     inkscape:window-y="38"
-     inkscape:window-maximized="1"
-     inkscape:current-layer="layer1" />
   <defs
      id="defs976">
     <rect
@@ -46,8 +22,6 @@
        id="rect1" />
   </defs>
   <g
-     inkscape:label="Layer 1"
-     inkscape:groupmode="layer"
      id="layer1"
      transform="translate(-27.69079,-88.402679)">
     <path
