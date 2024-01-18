@@ -1,4 +1,4 @@
-import { RefObject, useLayoutEffect, useRef, useState } from "react";
+import { RefObject, useEffect, useLayoutEffect, useRef, useState } from "react";
 
 import WorkText from "./WorkText";
 
@@ -7,6 +7,8 @@ interface BackgroundTextProps {
 }
 
 export default function BackgroundText(props: BackgroundTextProps) {
+  const [first_render, set_first_render] = useState(true);
+  const [animated, set_animated] = useState(false);
   const [word_steps, set_word_steps] = useState(0);
 
   const container_ref = useRef<HTMLDivElement>(null);
@@ -34,7 +36,7 @@ export default function BackgroundText(props: BackgroundTextProps) {
     return steps;
   };
 
-  const repeat_text = (
+  const repeat_svg = (
     steps: number,
     container_ref: RefObject<HTMLDivElement>,
     svg_ref: RefObject<SVGSVGElement>,
@@ -48,13 +50,21 @@ export default function BackgroundText(props: BackgroundTextProps) {
 
     const svgs: JSX.Element[] = [];
 
-    for (let i = 0; i < steps; i++) {
+    for (let i = 0; i < steps + 1; i++) {
       svgs.push(
         <WorkText
           key={i}
-          className="absolute left-0 w-full h-fit"
+          first={i >= steps}
+          animated={animated}
+          className={`
+		  absolute 
+		  w-full 
+		  h-fit 
+		  ${i < steps ? "opacity-0" : ""}
+		  `}
           style={{
-            bottom: `${step_size * (i + 1)}px`,
+            bottom: `${step_size * i}px`,
+            animationDelay: `${(steps - i) / steps}s`,
           }}
         />,
       );
@@ -65,8 +75,11 @@ export default function BackgroundText(props: BackgroundTextProps) {
 
   const handle_resize = () => {
     const steps = calc_trans_steps(container_ref, svg_ref);
-    console.log(steps);
     set_word_steps(steps);
+  };
+
+  const handle_scroll = () => {
+    if (!animated) set_animated(true);
   };
 
   // On component did update
@@ -81,6 +94,15 @@ export default function BackgroundText(props: BackgroundTextProps) {
     };
   }, []);
 
+  // Component did mount
+  useEffect(() => {
+    window.onscroll = handle_scroll;
+
+    return () => {
+      window.onscroll = null;
+    };
+  });
+
   return (
     <div
       ref={container_ref}
@@ -88,9 +110,9 @@ export default function BackgroundText(props: BackgroundTextProps) {
     >
       <WorkText
         ref={svg_ref}
-        className="absolute bottom-0 left-0 w-full h-fit"
+        className="invisible absolute bottom-0 left-0 w-full h-fit"
       />
-      {repeat_text(word_steps, container_ref, svg_ref)}
+      {repeat_svg(word_steps, container_ref, svg_ref)}
     </div>
   );
 }

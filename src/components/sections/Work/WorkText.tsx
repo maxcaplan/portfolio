@@ -1,6 +1,8 @@
-import { CSSProperties, ForwardedRef, forwardRef } from "react";
+import { CSSProperties, ForwardedRef, forwardRef, useEffect } from "react";
 
 interface WorkTextProps {
+  first?: boolean;
+  animated?: boolean;
   className?: string;
   style?: CSSProperties;
 }
@@ -14,9 +16,16 @@ const WorkText = forwardRef(
         height="197.33078"
         viewBox="0 0 168.33184 52.210435"
         version="1.1"
-        id="svg979"
+        id={props.first ? "first" : undefined}
         xmlns="http://www.w3.org/2000/svg"
-        className={`fill-brand-gray-900 stroke-[#181818] stroke-1 ${props.className}`}
+        className={`
+		fill-brand-gray-900 
+		stroke-[#181818] 
+		stroke-1 
+		transition
+		${props.animated && !props.first ? "opacity-0 animate-appear" : ""} 
+		${props.className}
+		`}
         style={props.style}
         strokeLinecap="round"
       >
