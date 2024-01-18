@@ -1,3 +1,4 @@
+import Footer from "./components/Footer/Footer";
 import Hero from "./components/Hero/Hero";
 
 // Sections
@@ -14,8 +15,9 @@ function App() {
           <div className="relative xl:col-span-1 flex flex-row w-full xl:border-r border-brand-gray-700 shadow-brand-gray-950 shadow-2xl">
             <Hero className="sticky top-0" />
           </div>
-          <div className="relative xl:col-span-2 flex flex-row w-full">
+          <div className="relative xl:col-span-2 flex flex-col w-full">
             <Work />
+            <Footer />
           </div>
         </div>
       </div>
