@@ -1,6 +1,6 @@
-import CharacterNoise from "../Backgrounds/CharacterNoise/CharacterNoise";
+import CharacterNoise from "./Backgrounds/CharacterNoise";
 import Footer from "./Footer";
-import Navbar from "../Navbar/Navbar";
+import Navbar from "./Navbar";
 
 type HeroProps = {
   className?: string;

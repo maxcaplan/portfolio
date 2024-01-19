@@ -2,7 +2,7 @@ import { useState, useEffect, useLayoutEffect, useRef } from "react";
 
 import CharacterPixel from "./CharacterPixel";
 
-import { makeNoise3D } from "../../../utils/noise/perlin.js";
+import { makeNoise3D } from "../../../../utils/noise/perlin";
 
 type ASCIINoiseProps = {
   animationSpeed?: number;
