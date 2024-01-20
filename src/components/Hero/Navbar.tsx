@@ -15,22 +15,22 @@ export function Navbar(props: NavbarProps) {
     {
       name: "work",
       href: "#work",
-      hover_class: "hover:underline hover:decoration-brand-purple",
+      hover_class: "hover:underline hover:decoration-brand-blue",
     },
     {
       name: "skills",
       href: "#skills",
-      hover_class: "hover:underline hover:decoration-brand-blue",
+      hover_class: "hover:underline hover:decoration-brand-green hidden",
     },
     {
       name: "about",
       href: "#about",
-      hover_class: "hover:underline hover:decoration-brand-green",
+      hover_class: "hover:underline hover:decoration-brand-purple",
     },
     {
       name: "contact",
       href: "#contact",
-      hover_class: "hover:underline hover:decoration-brand-red",
+      hover_class: "hover:underline hover:decoration-brand-red hidden",
     },
   ];
 

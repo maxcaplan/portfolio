@@ -112,11 +112,17 @@ export default {
       animation: {
         "fade-in": "fade-in 1s linear forwards",
         appear: "fade-in 1s steps(1, start) forwards",
+        blink: "fade-in-out 1s steps(1, start) infinite",
       },
       keyframes: {
         "fade-in": {
           "0%": { opacity: "0" },
           "100%": { opacity: "1" },
+        },
+        "fade-in-out": {
+          "0%": { opacity: "0" },
+          "50%": { opacity: "1" },
+          "100%": { opacity: "0" },
         },
       },
     },

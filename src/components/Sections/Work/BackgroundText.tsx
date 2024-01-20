@@ -106,7 +106,9 @@ export default function BackgroundText(props: BackgroundTextProps) {
   return (
     <div
       ref={container_ref}
-      className={`relative flex flex-col-reverse ${props.className || ""}`}
+      className={`relative flex flex-col-reverse h-full ${
+        props.className || ""
+      }`}
     >
       <WorkText
         ref={svg_ref}
