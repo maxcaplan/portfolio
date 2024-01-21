@@ -121,7 +121,7 @@ export default function About() {
 		`}
         >
           <img
-            src="https://picsum.photos/800/800"
+            src="/assets/images/about/max.webp"
             alt="Max Caplan"
             className="md:col-span-1 rounded shadow-xl shadow-brand-gray-950 w-full"
           />
