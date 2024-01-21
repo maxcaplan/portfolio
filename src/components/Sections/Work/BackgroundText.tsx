@@ -7,12 +7,13 @@ interface BackgroundTextProps {
 }
 
 export default function BackgroundText(props: BackgroundTextProps) {
-  const [first_render, set_first_render] = useState(true);
+  const [is_visible, set_is_visible] = useState(false);
   const [animated, set_animated] = useState(false);
   const [word_steps, set_word_steps] = useState(0);
 
   const container_ref = useRef<HTMLDivElement>(null);
   const svg_ref = useRef<SVGSVGElement>(null);
+  const trigger_ref = useRef<HTMLDivElement>(null);
 
   const calc_trans_steps = (
     container_ref: RefObject<HTMLDivElement>,
@@ -79,7 +80,7 @@ export default function BackgroundText(props: BackgroundTextProps) {
   };
 
   const handle_scroll = () => {
-    if (!animated) set_animated(true);
+    if (!animated && is_visible) set_animated(true);
   };
 
   // On component did update
@@ -96,10 +97,26 @@ export default function BackgroundText(props: BackgroundTextProps) {
 
   // Component did mount
   useEffect(() => {
+    if (!trigger_ref.current) {
+      set_is_visible(true);
+      return;
+    }
+
+    // Set section is visible
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        set_is_visible(true);
+        if (trigger_ref.current) observer.unobserve(trigger_ref.current);
+      }
+    });
+
+    observer.observe(trigger_ref.current);
+
     window.onscroll = handle_scroll;
 
     return () => {
       window.onscroll = null;
+      if (trigger_ref.current) observer.unobserve(trigger_ref.current);
     };
   });
 
@@ -110,6 +127,7 @@ export default function BackgroundText(props: BackgroundTextProps) {
         props.className || ""
       }`}
     >
+      <div ref={trigger_ref} className="absolute top-1/2 right-0"></div>
       <WorkText
         ref={svg_ref}
         className="invisible absolute bottom-0 left-0 w-full h-fit"
