@@ -11,6 +11,7 @@ export default function Tooltip(props: TooltipProps) {
 	  	-top-[100%] 
 	  	left-1/2 
 	  	-translate-x-1/2
+		whitespace-nowrap
 		${props.className || ""}
 	  	`}
 		>
@@ -22,6 +23,7 @@ export default function Tooltip(props: TooltipProps) {
 	    	text-sm
 			italic
 	    	bg-brand-gray-600
+			text-brand-white
 	    	shadow-brand-gray-950
 	    	shadow-md
 			`}

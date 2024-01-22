@@ -1,8 +1,14 @@
+import { useState } from "react";
+import Tooltip from "../common/Tooltip/Tooltip";
+
 export default function Footer() {
+	let [email_tooltip_text, set_email_tooltip_text] = useState("click to copy");
+
 	type Social = {
 		href: string;
 		icon: JSX.Element;
 	};
+
 	const socials: Social[] = [
 		{
 			href: "https://github.com/maxcaplan",
@@ -50,6 +56,8 @@ export default function Footer() {
 	const write_text_to_clipboard = async (text: string) => {
 		try {
 			await navigator.clipboard.writeText(text);
+
+			set_email_tooltip_text("copied :)");
 		} catch (e) {
 			console.log(e);
 		}
@@ -75,12 +83,20 @@ export default function Footer() {
 			className="z-50 w-full h-fit flex flex-row items-center gap-4 text-brand-gray-200"
 		>
 			{social_buttons(socials)}
-			<button
-				className="flex-grow text-end"
-				onClick={() => write_text_to_clipboard(email)}
-			>
-				{email}
-			</button>
+			<div className="flex flex-grow justify-end">
+				<button
+					className="group/email relative"
+					onMouseEnter={() => set_email_tooltip_text("click to copy")}
+					onClick={() => write_text_to_clipboard(email)}
+				>
+					{email}
+
+					<Tooltip
+						className="hidden group-hover/email:inline -translate-y-1"
+						tooltipText={email_tooltip_text}
+					/>
+				</button>
+			</div>
 		</div>
 	);
 }
