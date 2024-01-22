@@ -11,73 +11,128 @@
 /* ==========================================================================
    JetBrains Mono Font Face
    ========================================================================== */
+
 /* Regular */
 @font-face {
-  font-family: "JetBrains Mono";
-  src: url("/assets/fonts/JetBrainsMono-Regular.woff2") format("woff2");
+  font-family: "JetBrainsMono";
+  src: url("/assets/fonts/JetBrainsMono/JetBrainsMono-Regular.woff2")
+    format("woff2");
   font-weight: 400;
   font-style: normal;
 }
 
 /* Italic */
 @font-face {
-  font-family: "JetBrains Mono";
-  src: url("/assets/fonts/JetBrainsMono-Italic.woff2") format("woff2");
+  font-family: "JetBrainsMono";
+  src: url("/assets/fonts/JetBrainsMono/JetBrainsMono-Italic.woff2")
+    format("woff2");
   font-weight: 400;
   font-style: italic;
 }
 
 /* Bold */
 @font-face {
-  font-family: "JetBrains Mono";
-  src: url("/assets/fonts/JetBrainsMono-Bold.woff2") format("woff2");
+  font-family: "JetBrainsMono";
+  src: url("/assets/fonts/JetBrainsMono/JetBrainsMono-Bold.woff2")
+    format("woff2");
   font-weight: 700;
   font-style: normal;
 }
 
 /* Bold Italic */
 @font-face {
-  font-family: "JetBrains Mono";
-  src: url("/assets/fonts/JetBrainsMono-BoldItalic.woff2") format("woff2");
+  font-family: "JetBrainsMono";
+  src: url("/assets/fonts/JetBrainsMono/JetBrainsMono-BoldItalic.woff2")
+    format("woff2");
   font-weight: 700;
   font-style: italic;
 }
 
 /* Extra Bold */
 @font-face {
-  font-family: "JetBrains Mono";
-  src: url("/assets/fonts/JetBrainsMono-ExtraBold.woff2") format("woff2");
+  font-family: "JetBrainsMono";
+  src: url("/assets/fonts/JetBrainsMono/JetBrainsMono-ExtraBold.woff2")
+    format("woff2");
   font-weight: 800;
   font-style: normal;
 }
 
 /* Extra Bold Italic */
 @font-face {
-  font-family: "JetBrains Mono";
-  src: url("/assets/fonts/JetBrainsMono-ExtraBoldItalic.woff2") format("woff2");
+  font-family: "JetBrainsMono";
+  src: url("/assets/fonts/JetBrainsMono/JetBrainsMono-ExtraBoldItalic.woff2")
+    format("woff2");
   font-weight: 800;
   font-style: italic;
 }
 
 /* Light */
 @font-face {
-  font-family: "JetBrains Mono";
-  src: url("/assets/fonts/JetBrainsMono-Light.woff2") format("woff2");
+  font-family: "JetBrainsMono";
+  src: url("/assets/fonts/JetBrainsMono/JetBrainsMono-Light.woff2")
+    format("woff2");
   font-weight: 300;
   font-style: normal;
 }
 
 /* Light Italic */
 @font-face {
-  font-family: "JetBrains Mono";
-  src: url("/assets/fonts/JetBrainsMono-LightItalic.woff2") format("woff2");
+  font-family: "JetBrainsMono";
+  src: url("/assets/fonts/JetBrainsMono/JetBrainsMono-LightItalic.woff2")
+    format("woff2");
   font-weight: 300;
   font-style: italic;
 }
 
 /* ==========================================================================
-   JetBrains Mono Font Face
+	Comic Neue Font Face
    ========================================================================== */
+
+@font-face {
+  font-family: "Comic Neue";
+  src: url("/assets/fonts/Comic_Neue/ComicNeue-Bold.ttf");
+}
+
+/* ==========================================================================
+	Lobster Font Face
+   ========================================================================== */
+
+@font-face {
+  font-family: "Lobster";
+  src: url("/assets/fonts/Lobster/Lobster-Regular.ttf");
+}
+
+/* ==========================================================================
+	Merriweather Font Face
+   ========================================================================== */
+
+@font-face {
+  font-family: "Merriweather";
+  src: url("/assets/fonts/Merriweather/Merriweather-Black.ttf");
+}
+
+/* ==========================================================================
+	VT323 Font Face
+   ========================================================================== */
+
+@font-face {
+  font-family: "VT323";
+  src: url("/assets/fonts/VT323/VT323-Regular.ttf");
+}
+
+/* ==========================================================================
+	VT323 Font Face
+   ========================================================================== */
+
+@font-face {
+  font-family: "Indie Flower";
+  src: url("/assets/fonts/Indie_Flower/IndieFlower-Regular.ttf");
+}
+
+/* ==========================================================================
+	Main Styles	
+   ========================================================================== */
+
 body {
   font-variant-ligatures: none;
 }
