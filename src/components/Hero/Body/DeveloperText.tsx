@@ -42,7 +42,7 @@ export default function DeveloperText(props: DeveloperTextProps) {
 		>
 			{developer_text}
 			{cursor_visible && (
-				<span className="text-6xl text-brand-white-200">█</span>
+				<span className="text-4xl sm:text-6xl text-brand-white-200">█</span>
 			)}
 		</h1>
 	);
