@@ -1,13 +1,20 @@
 import { Skill } from "../../../types";
 import Tooltip from "../../common/Tooltip/Tooltip";
+import { PropsWithChildren } from "react";
 
 interface SkillIconProps {
 	skill: Skill;
 }
 
 export default function SkillIcon(props: SkillIconProps) {
+	interface Icon {
+		name: string;
+		href?: string;
+		element: JSX.Element;
+	}
+
 	interface Icons {
-		[key: string]: { name: string; href?: string; element: JSX.Element };
+		[key: string]: Icon;
 	}
 
 	const icons: Icons = {
@@ -132,28 +139,40 @@ export default function SkillIcon(props: SkillIconProps) {
 		},
 	};
 
+	/** Wrapper component for skill icon. Conditionaly renders as an anchor if
+	 * icon has href
+	 * @param icon - The icon that the wrapper is for
+	 */
+	const SkillIconWrapper = (props: PropsWithChildren<{ icon: Icon }>) => {
+		const wrapper_class_name = `
+		group/skill
+		relative
+		flex 
+		items-center 
+  		justify-center 
+		aspect-square 
+		p-1 
+		bg-brand-gray-700 
+		rounded
+		`;
+
+		return props.icon.href !== undefined ? (
+			<a href={props.icon.href} target="_blank" className={wrapper_class_name}>
+				{props.children}
+			</a>
+		) : (
+			<div className={wrapper_class_name}>{props.children}</div>
+		);
+	};
+
 	return (
-		<a
-			href={icons[props.skill].href}
-			target={icons[props.skill].href ? "_blank" : undefined}
-			className={`
-	  	group/skill
-	  	relative
-	  	flex 
-	  	items-center 
-  	  	justify-center 
-	  	aspect-square 
-	  	p-1 
-	  	bg-brand-gray-700 
-	  	rounded
-	  	`}
-		>
+		<SkillIconWrapper icon={icons[props.skill]}>
 			{icons[props.skill].element}
 
 			<Tooltip
 				tooltipText={icons[props.skill].name}
 				className="hidden group-hover/skill:inline"
 			/>
-		</a>
+		</SkillIconWrapper>
 	);
 }
