@@ -1,6 +1,6 @@
 import { useState, useEffect, forwardRef } from "react";
 
-type ASCIIPixelProps = {
+type CharacterPixelProps = {
   characters: string[];
   brightness: number;
   hidden?: boolean;
@@ -14,7 +14,7 @@ type ASCIIPixelProps = {
  * @param {Boolean} [hidden] - Is the component hidden
  */
 const CharacterPixel = forwardRef(
-  (props: ASCIIPixelProps, ref: React.ForwardedRef<HTMLDivElement>) => {
+  (props: CharacterPixelProps, ref: React.ForwardedRef<HTMLDivElement>) => {
     const [characterIndex, setCharacterIndex] = useState(0);
 
     // Updates character index based on brightness
@@ -32,7 +32,7 @@ const CharacterPixel = forwardRef(
     useEffect(updateCharacterIndex, [props.brightness]);
 
     return (
-      <div className={`inline-block size-fit p-1 ${hidden_classes}`}>
+      <div className={`inline-block size-fit px-1 ${hidden_classes}`}>
         <span
           ref={ref}
           className={`
