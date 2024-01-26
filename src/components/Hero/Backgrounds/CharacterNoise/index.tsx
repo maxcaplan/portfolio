@@ -4,7 +4,7 @@ import CharacterPixel from "./CharacterPixel";
 
 import { makeNoise3D } from "../../../../utils/noise/perlin";
 
-type ASCIINoiseProps = {
+type CharacterNoiseProps = {
   animationSpeed?: number;
   frameRate?: number;
   seed?: number;
@@ -12,13 +12,15 @@ type ASCIINoiseProps = {
 
 /**
  * Renders perlin noise with a grid of text characters
- * @param {Boolean} [animationSpeed=1] - The speed of the animation
- * */
-function ASCIINoise({
+ * @param [animationSpeed=1] - The speed of the animation
+ * @param [frameRate=12] - The fps of the animation
+ * @param [seed=0] - Seeding for the noise generation
+ */
+export default function CharacterNoise({
   animationSpeed = 1,
   frameRate = 12,
   seed = 0,
-}: ASCIINoiseProps) {
+}: CharacterNoiseProps) {
   // Refrence for container element
   const containerRef = useRef<HTMLDivElement>(null);
   // Refrence for character pixel element
@@ -167,5 +169,3 @@ function ASCIINoise({
     </div>
   );
 }
-
-export default ASCIINoise;
