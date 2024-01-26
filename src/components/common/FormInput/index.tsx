@@ -1,10 +1,12 @@
+import { ChangeEventHandler } from "react";
+
 interface FormInputProps {
   name?: string;
   placeholder?: string;
   email?: boolean;
   textarea?: boolean;
   rows?: number;
-  onChange?: React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>;
+  onChange?: ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>;
   value?: string | number | undefined;
   className?: string;
 }
