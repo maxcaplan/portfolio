@@ -1,14 +1,16 @@
 import Footer from "./components/Footer";
 import Hero from "./components/Hero";
 
-import Sections from "./components/Sections";
+import About from "./components/Sections/About";
+import Contact from "./components/Sections/Contact";
+import Work from "./components/Sections/Work";
 
 function App() {
   return (
     <div id="app" className="bg-brand-gray-950 text-brand-white font-mono">
       <div
         id="app-container"
-        className="w-full xl:max-w-[200vh] mx-auto bg-brand-gray-900"
+        className="w-full xl:max-w-[200vh] flex flex-col gap-y-20 mx-auto bg-brand-gray-900"
       >
         <div className="flex flex-col xl:grid xl:grid-cols-3 xl:grid-flow-row w-full">
           <div
@@ -28,11 +30,16 @@ function App() {
             <Hero className="sticky top-0" />
           </div>
 
-          <div className="relative xl:col-span-2 flex flex-col gap-y-8 w-full pt-6">
-            <Sections />
-            <Footer />
+          <div className="relative xl:col-span-2 flex flex-col gap-y-20 w-full pt-6 pb-20">
+            <Work />
+
+            <About />
           </div>
         </div>
+
+        <Contact />
+
+        <Footer />
       </div>
     </div>
   );

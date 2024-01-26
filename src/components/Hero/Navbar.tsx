@@ -53,6 +53,7 @@ export function Navbar(props: NavbarProps) {
 		  duration-200 
 		  decoration-[1.5px] 
 		  decoration-wavy 
+		  underline-offset-4
 		  hover:text-brand-white 
 		  ${link.hover_class}`}
           >

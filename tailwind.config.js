@@ -78,7 +78,7 @@ export default {
           700: "#BCEB31",
           800: "#A0D014",
           900: "#789D0F",
-          950: "#65830D",
+          950: "#415408",
         },
         "brand-yellow": {
           DEFAULT: "#FCDC4D",

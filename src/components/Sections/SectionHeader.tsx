@@ -11,6 +11,7 @@ export default function SectionHeader(props: SectionHeaderProps) {
 	text-3xl 
 	font-bold
 	decoration-brand-purple 
+	underline-offset-8
 	${props.className || ""}
 	`}
     >
