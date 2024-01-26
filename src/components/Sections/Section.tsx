@@ -1,3 +1,5 @@
+import SectionHeader from "./SectionHeader";
+
 interface SectionProps {
   number: number;
   title: string;
@@ -30,21 +32,11 @@ export default function Section(props: SectionProps) {
         {props.backgroundChildren}
       </div>
       <div className="z-50 relative w-full max-w-4xl mx-auto px-6">
-        <h2 className="text-3xl font-bold mb-20">
-          {props.number}
-          {". "}
-          <span
-            className={`
-		decoration-brand-purple 
-		decoration-wavy 
-		decoration-2 
-		underline
-		${props.titleClassName || ""}
-		`}
-          >
-            {props.title}
-          </span>
-        </h2>
+        <SectionHeader
+          title={props.title}
+          number={props.number}
+          className={`mb-20 ${props.titleClassName || ""}`}
+        />
 
         {props.children}
       </div>
