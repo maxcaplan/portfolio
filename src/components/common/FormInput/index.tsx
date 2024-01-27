@@ -3,6 +3,7 @@ import { ChangeEventHandler } from "react";
 interface FormInputProps {
   name?: string;
   placeholder?: string;
+  required?: boolean;
   email?: boolean;
   textarea?: boolean;
   rows?: number;
@@ -17,12 +18,20 @@ export default function FormInput(props: FormInputProps) {
 
   return (
     <div className={`flex flex-col gap-y-2 ${props.className || ""}`}>
-      {props.name && <p>{props.name}:</p>}
+      {props.name && (
+        <p>
+          {props.name}
+          {props.required && (
+            <span className="text-brand-red align-super text-sm"> *</span>
+          )}
+        </p>
+      )}
 
       {!props.textarea ? (
         <input
           type={props.email ? "email" : "text"}
           placeholder={props.placeholder}
+          required={props.required}
           value={props.value}
           onChange={props.onChange}
           className={input_classname}
@@ -30,10 +39,11 @@ export default function FormInput(props: FormInputProps) {
       ) : (
         <textarea
           placeholder={props.placeholder}
+          required={props.required}
           rows={props.rows}
           value={props.value}
           onChange={props.onChange}
-          className={input_classname}
+          className={`resize-none ${input_classname}`}
         />
       )}
     </div>

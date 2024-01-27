@@ -1,19 +1,22 @@
 import SectionHeader from "../SectionHeader";
+import CharacterGrid from "./CharacterGrid";
 import EmailForm from "./EmailForm";
 
 export default function Contact() {
   return (
-    <div className="flex flex-col gap-y-20 w-full max-w-6xl mx-auto">
+    <div className="flex flex-col gap-y-20 w-full max-w-6xl mx-auto px-6">
       <SectionHeader
         title="contact"
         number={3}
         className="decoration-brand-red"
       />
 
-      <div className="w-full grid grid-cols-2">
-        <div className="col-span-1"></div>
+      <div className="w-full lg:grid lg:grid-cols-2 md:gap-x-8">
+        <div className="hidden lg:block col-span-1">
+          <CharacterGrid />
+        </div>
 
-        <div className="col-span-1">
+        <div className="w-full lg:col-span-1">
           <div className="w-full h-full overflow-hidden rounded shadow border border-brand-gray-300">
             <div className="relative flex items-center justify-center p-2 border-b border-brand-gray-300 bg-brand-gray-700">
               {/* Mail icon */}

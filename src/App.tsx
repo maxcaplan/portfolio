@@ -12,7 +12,7 @@ function App() {
         id="app-container"
         className="w-full xl:max-w-[200vh] flex flex-col gap-y-20 mx-auto bg-brand-gray-900"
       >
-        <div className="flex flex-col xl:grid xl:grid-cols-3 xl:grid-flow-row w-full">
+        <div className="flex flex-col xl:grid xl:grid-cols-3 xl:grid-flow-row w-full border-b border-brand-gray-700">
           <div
             className={`
 		  relative 
@@ -23,8 +23,6 @@ function App() {
 		  border-b
 		  xl:border-r 
 		  border-brand-gray-700 
-		  shadow-brand-gray-950 
-		  shadow-2xl
 		  `}
           >
             <Hero className="sticky top-0" />
