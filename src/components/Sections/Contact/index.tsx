@@ -1,10 +1,41 @@
+import { useEffect, useRef, useState } from "react";
 import SectionHeader from "../SectionHeader";
 import CharacterGrid from "./CharacterGrid";
 import EmailForm from "./EmailForm";
 
 export default function Contact() {
+  const [do_fade_in, set_do_fade_in] = useState(false);
+
+  const trigger_ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!trigger_ref.current) {
+      set_do_fade_in(true);
+      return;
+    }
+
+    // Start animations when section is visible
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        set_do_fade_in(true);
+        if (trigger_ref.current) observer.unobserve(trigger_ref.current);
+      }
+    });
+
+    observer.observe(trigger_ref.current);
+
+    return () => {
+      if (trigger_ref.current) observer.unobserve(trigger_ref.current);
+    };
+  }, []);
+
   return (
-    <div className="flex flex-col gap-y-20 w-full max-w-6xl mx-auto px-6">
+    <div className="relative flex flex-col gap-y-20 w-full max-w-6xl mx-auto px-6">
+      <div
+        ref={trigger_ref}
+        className="absolute top-1/2 left-1/2 invisible"
+      ></div>
+
       <SectionHeader
         title="contact"
         number={3}
@@ -16,7 +47,11 @@ export default function Contact() {
           <CharacterGrid />
         </div>
 
-        <div className="w-full lg:col-span-1">
+        <div
+          className={`w-full lg:col-span-1 ${
+            do_fade_in ? "animate-fade-in-up" : "opacity-0"
+          }`}
+        >
           <div className="w-full h-full overflow-hidden rounded shadow border border-brand-gray-300">
             <div className="relative flex items-center justify-center p-2 border-b border-brand-gray-300 bg-brand-gray-700">
               {/* Mail icon */}

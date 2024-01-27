@@ -111,6 +111,7 @@ export default {
       },
       animation: {
         "fade-in": "fade-in 1s linear forwards",
+        "fade-in-up": "fade-in-up 0.5s linear forwards",
         appear: "fade-in 1s steps(1, start) forwards",
         blink: "fade-in-out 1s steps(1, start) infinite",
       },
@@ -123,6 +124,10 @@ export default {
           "0%": { opacity: "0" },
           "50%": { opacity: "1" },
           "100%": { opacity: "0" },
+        },
+        "fade-in-up": {
+          "0%": { opacity: "0", transform: "translateY(1rem)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
         },
       },
     },
