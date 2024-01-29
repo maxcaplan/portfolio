@@ -8,6 +8,7 @@ export function Navbar(props: NavbarProps) {
     name: string;
     href: string;
     hover_class: string;
+    hidden?: boolean;
   };
 
   /** Navigation link information for the navbar */
@@ -20,7 +21,8 @@ export function Navbar(props: NavbarProps) {
     {
       name: "skills",
       href: "#skills",
-      hover_class: "hover:underline hover:decoration-brand-green hidden",
+      hover_class: "hover:underline hover:decoration-brand-green",
+      hidden: true,
     },
     {
       name: "about",
@@ -30,7 +32,7 @@ export function Navbar(props: NavbarProps) {
     {
       name: "contact",
       href: "#contact",
-      hover_class: "hover:underline hover:decoration-brand-red hidden",
+      hover_class: "hover:underline hover:decoration-brand-red",
     },
   ];
 
@@ -43,7 +45,7 @@ export function Navbar(props: NavbarProps) {
       const elements: JSX.Element[] = [];
 
       elements.push(
-        <span className="group">
+        <span className={`group ${link.hidden ? "hidden" : ""}`}>
           <span className="hidden">&gt; </span>
           <a
             key={`a${idx}`}

@@ -30,7 +30,10 @@ export default function Contact() {
   }, []);
 
   return (
-    <div className="relative flex flex-col gap-y-20 w-full max-w-6xl mx-auto px-6">
+    <div
+      id="contact"
+      className="relative flex flex-col gap-y-20 w-full max-w-6xl mx-auto px-6"
+    >
       <div
         ref={trigger_ref}
         className="absolute top-1/2 left-1/2 invisible"
