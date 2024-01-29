@@ -1,10 +1,6 @@
-import CImg from "../../../assets/sections/contacts/chars/c.svg";
-import OImg from "../../../assets/sections/contacts/chars/o.svg";
-import NImg from "../../../assets/sections/contacts/chars/n.svg";
-import TImg from "../../../assets/sections/contacts/chars/t.svg";
-import AImg from "../../../assets/sections/contacts/chars/a.svg";
-
 import { useEffect, useState } from "react";
+
+import Chars from "./Chars";
 
 export default function CharacterRow() {
   const [grow_arr, set_grow_arr] = useState([
@@ -42,15 +38,15 @@ export default function CharacterRow() {
 
   return (
     <div className="w-full flex flex-row gap-x-2">
-      {[CImg, OImg, NImg, TImg, AImg, CImg, TImg].map((char, idx, chars) => {
+      {Chars.map((Char, idx) => {
         const grow = grow_arr[idx] ? "flex-grow" : "";
-        const align = idx >= chars.length - 1 ? "justify-end" : "";
+        const align = idx >= Chars.length - 1 ? "justify-end" : "";
 
         return (
           <div
             className={`h-full flex items-end transition-[flex-grow] duration-1000 ${grow} ${align}`}
           >
-            <img src={char} className="w-12" />
+            <Char className="fill-brand-gray-900 stroke-brand-gray-700 stroke-2 w-12" />
           </div>
         );
       })}
