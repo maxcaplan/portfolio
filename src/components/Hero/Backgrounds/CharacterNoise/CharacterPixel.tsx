@@ -40,6 +40,7 @@ const CharacterPixel = forwardRef(
 		  text-5xl 
 		  leading-normal 
 		  text-brand-gray-700 
+		  font-bold
 		  ${props.className}`}
         >
           {props.characters[characterIndex]}
