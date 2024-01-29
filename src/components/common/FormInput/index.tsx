@@ -4,6 +4,7 @@ interface FormInputProps {
   name?: string;
   placeholder?: string;
   required?: boolean;
+  autocomplete?: string;
   email?: boolean;
   textarea?: boolean;
   rows?: number;
@@ -29,17 +30,21 @@ export default function FormInput(props: FormInputProps) {
 
       {!props.textarea ? (
         <input
+          name={props.autocomplete}
           type={props.email ? "email" : "text"}
           placeholder={props.placeholder}
           required={props.required}
+          autoComplete={props.autocomplete}
           value={props.value}
           onChange={props.onChange}
           className={input_classname}
         />
       ) : (
         <textarea
+          name={props.autocomplete}
           placeholder={props.placeholder}
           required={props.required}
+          autoComplete={props.autocomplete}
           rows={props.rows}
           value={props.value}
           onChange={props.onChange}

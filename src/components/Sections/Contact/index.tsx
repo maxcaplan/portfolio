@@ -71,9 +71,13 @@ export default function Contact() {
                 <polyline points="22,6 12,13 2,6"></polyline>
               </svg>
 
-              <p className="text-sm">~/contact/email.form</p>
+              <p className="text-sm">
+                form <span className="hidden sm:inline">~/contact/</span>
+                <span className="inline sm:hidden">~/c/</span>
+                email
+              </p>
 
-              <div className="absolute right-0 flex flex-row items-center gap-x-4 mr-2">
+              <div className="absolute right-0 flex flex-row items-center gap-x-2 lg:gap-x-4 mr-2">
                 {/* Minus icon */}
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
