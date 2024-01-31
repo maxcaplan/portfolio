@@ -5,7 +5,7 @@ import About from "./components/Sections/About";
 import Contact from "./components/Sections/Contact";
 import Work from "./components/Sections/Work";
 
-function App() {
+function Home() {
   return (
     <div id="app" className="bg-brand-gray-950 text-brand-white font-mono">
       <div
@@ -43,4 +43,4 @@ function App() {
   );
 }
 
-export default App;
+export default Home;
