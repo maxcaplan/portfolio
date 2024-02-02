@@ -3,7 +3,7 @@ import logoSmDark from "../../assets/logo/logo_sm_dark.svg";
 
 type NavbarProps = {};
 
-export function Navbar(props: NavbarProps) {
+export function Navbar(_props: NavbarProps) {
   type NavLink = {
     name: string;
     href: string;
@@ -36,38 +36,6 @@ export function Navbar(props: NavbarProps) {
     },
   ];
 
-  /**
-   * Returns a list of elements for an array of NavLinks
-   * @param {NavLink[]} nav_links - The array of NavLinks to generate the elements for
-   */
-  const render_nav_links = (nav_links: NavLink[]) => {
-    return nav_links.map((link, idx) => {
-      const elements: JSX.Element[] = [];
-
-      elements.push(
-        <span className={`group ${link.hidden ? "hidden" : ""}`}>
-          <span className="hidden">&gt; </span>
-          <a
-            key={`a${idx}`}
-            href={link.href}
-            className={`
-		  transtion 
-		  duration-200 
-		  decoration-[1.5px] 
-		  decoration-wavy 
-		  underline-offset-4
-		  hover:text-brand-white 
-		  ${link.hover_class}`}
-          >
-            {link.name}
-          </a>
-        </span>,
-      );
-
-      return elements;
-    });
-  };
-
   return (
     <div id="navbar" className="z-50 w-full">
       <div
@@ -92,10 +60,23 @@ export function Navbar(props: NavbarProps) {
             id="navbar-links"
             className="flex flex-col items-end gap-4 no-underline text-brand-gray-200"
           >
-            {render_nav_links(nav_links)}
+            {nav_links.map((link, idx) => {
+              return (
+                <span
+                  key={`link-${idx}`}
+                  className={`group ${link.hidden ? "hidden" : ""}`}
+                >
+                  <span className="hidden">&gt; </span>
+                  <a
+                    href={link.href}
+                    className={`transtion duration-200 decoration-[1.5px] decoration-wavy underline-offset-4 hover:text-brand-white ${link.hover_class}`}
+                  >
+                    {link.name}
+                  </a>
+                </span>
+              );
+            })}
           </div>
-
-          {/*<button id="hamburger">///</button>*/}
         </div>
       </div>
     </div>

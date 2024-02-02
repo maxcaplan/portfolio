@@ -44,6 +44,7 @@ export default function CharacterRow() {
 
         return (
           <div
+            key={`charRow-${idx}`}
             className={`h-full flex items-end transition-[flex-grow] duration-1000 ${grow} ${align}`}
           >
             <Char className="fill-brand-gray-900 stroke-brand-gray-700 stroke-2 w-12" />

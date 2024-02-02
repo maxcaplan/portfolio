@@ -123,8 +123,8 @@ const WorkCard: FunctionComponent<WorkCardProps> = (props) => {
 
       <div className="col-span-1 row-span-1 flex flex-row gap-2">
         {props.skills &&
-          props.skills.map((skill) => {
-            return <SkillIcon skill={skill} />;
+          props.skills.map((skill, idx) => {
+            return <SkillIcon key={`skill-${idx}`} skill={skill} />;
           })}
       </div>
 
