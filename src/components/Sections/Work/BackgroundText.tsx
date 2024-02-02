@@ -54,7 +54,7 @@ export default function BackgroundText(props: BackgroundTextProps) {
     for (let i = 0; i < steps + 1; i++) {
       svgs.push(
         <WorkText
-          key={i}
+          key={`work-${i}`}
           first={i >= steps}
           animated={animated}
           className={`

@@ -200,9 +200,9 @@ export default function EmailForm() {
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
               className={`stroke-current ${
                 is_sending_email || is_email_sent ? "hidden" : "inline"
               }`}
@@ -219,9 +219,9 @@ export default function EmailForm() {
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
               className={`stroke-current animate-spin ${
                 is_sending_email ? "inline" : "hidden"
               }`}
@@ -244,9 +244,9 @@ export default function EmailForm() {
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
               className={`stroke-current ${
                 is_email_sent && !is_sending_email ? "inline" : "hidden"
               }`}
