@@ -4,18 +4,25 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
+    "dev": "NODE_ENV=development node server",
+    "build": "npm run build:client && npm run build:server",
+    "build:client": "tsc && vite build --outDir dist/client",
+    "build:server": "tsc && vite build --outDir dist/server --ssr src/entry-server.tsx",
+    "serve": "NODE_ENV=production node server",
     "preview": "vite preview"
   },
   "dependencies": {
     "@emailjs/browser": "^3.12.1",
+    "express": "^4.18.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-markdown": "^9.0.1",
-    "react-router-dom": "^6.21.3"
+    "react-router-dom": "^6.21.3",
+    "sirv": "^2.0.4"
   },
   "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.11.16",
     "@types/react": "^18.0.15",
     "@types/react-dom": "^18.0.6",
     "@types/showdown": "^2.0.6",

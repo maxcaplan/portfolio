@@ -123,7 +123,7 @@ export default function EmailForm() {
 
   // Reset is_email_sent to false after 2 seconds of it being true
   useEffect(() => {
-    let timeout: number;
+    let timeout: NodeJS.Timeout;
 
     if (is_email_sent) {
       timeout = setTimeout(() => {

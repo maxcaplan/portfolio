@@ -1,14 +1,15 @@
-import { FunctionComponent } from "react";
+import { FunctionComponent, useEffect, useState } from "react";
 import { Work } from "../../../types";
 import SkillIcon from "./SkillIcon";
 
-import { Converter } from "showdown";
+import showdown from "showdown";
 
 interface WorkCardProps extends Work {
   flipped?: boolean;
 }
 
 const WorkCard: FunctionComponent<WorkCardProps> = (props) => {
+  const [description, set_description] = useState<string>();
   const image_flip_classes = props.flipped
     ? "col-start-2 col-end-4"
     : "col-span-2";
@@ -19,7 +20,7 @@ const WorkCard: FunctionComponent<WorkCardProps> = (props) => {
   };
 
   const markdown_to_txt = (markdown: string): string => {
-    const converter = new Converter();
+    const converter = new showdown.Converter();
     const html_str = `<div>${converter.makeHtml(markdown)}</div>`;
 
     const parser = new DOMParser();
@@ -39,6 +40,10 @@ const WorkCard: FunctionComponent<WorkCardProps> = (props) => {
 
     return text.join(" ");
   };
+
+  useEffect(() => {
+    set_description(markdown_to_txt(props.description));
+  }, []);
 
   return (
     <div
@@ -116,9 +121,7 @@ const WorkCard: FunctionComponent<WorkCardProps> = (props) => {
       </h4>
 
       <div className="col-span-1 row-span-2">
-        <p className="max-h-full font-sans line-clamp-3">
-          {markdown_to_txt(props.description)}
-        </p>
+        <p className="max-h-full font-sans line-clamp-3">{description}</p>
       </div>
 
       <div className="col-span-1 row-span-1 flex flex-row gap-2">

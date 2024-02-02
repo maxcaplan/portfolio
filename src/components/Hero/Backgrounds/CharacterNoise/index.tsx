@@ -1,4 +1,4 @@
-import { useState, useEffect, useLayoutEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 
 import CharacterPixel from "./CharacterPixel";
 
@@ -114,7 +114,7 @@ export default function CharacterNoise({
   }
 
   // Component did update
-  useLayoutEffect(() => {
+  useEffect(() => {
     // Update grid size and add resize event
     updateGridSize();
     window.addEventListener("resize", updateGridSize);
