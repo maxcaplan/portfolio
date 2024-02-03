@@ -5,6 +5,7 @@ interface FormInputProps {
   placeholder?: string;
   required?: boolean;
   autocomplete?: string;
+  disabled?: boolean;
   email?: boolean;
   textarea?: boolean;
   rows?: number;
@@ -15,7 +16,7 @@ interface FormInputProps {
 
 export default function FormInput(props: FormInputProps) {
   const input_classname =
-    "px-3 py-2 rounded border border-brand-gray-400 bg-brand-gray-700 placeholder:text-brand-gray-300";
+    "px-3 py-2 rounded border border-brand-gray-400 bg-brand-gray-700 placeholder:text-brand-gray-300 disabled:text-brand-gray-300 disabled:italic";
 
   return (
     <div className={`flex flex-col gap-y-2 ${props.className || ""}`}>
@@ -35,6 +36,7 @@ export default function FormInput(props: FormInputProps) {
           placeholder={props.placeholder}
           required={props.required}
           autoComplete={props.autocomplete}
+          disabled={props.disabled}
           value={props.value}
           onChange={props.onChange}
           className={input_classname}
@@ -45,6 +47,7 @@ export default function FormInput(props: FormInputProps) {
           placeholder={props.placeholder}
           required={props.required}
           autoComplete={props.autocomplete}
+          disabled={props.disabled}
           rows={props.rows}
           value={props.value}
           onChange={props.onChange}

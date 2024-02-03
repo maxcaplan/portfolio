@@ -65,7 +65,7 @@ export default function EmailForm() {
   };
 
   /**
-   * Disaplays an error on the form UI and logs Error objects to console
+   * Displays an error on the form UI and logs Error objects to console
    * @param error - The data to throw as an error
    */
   const throw_form_error = (error: unknown) => {
@@ -106,6 +106,11 @@ export default function EmailForm() {
 
       set_is_sending_email(false);
       set_is_email_sent(true);
+
+      // Reset form fields
+      set_name("");
+      set_email("");
+      set_message("");
     } catch (e) {
       set_is_sending_email(false);
       throw e;
@@ -143,6 +148,7 @@ export default function EmailForm() {
         placeholder="Arthur Dent"
         required={true}
         autocomplete="given-name"
+        disabled={is_sending_email}
         value={name}
         onChange={(event) => on_input_change(event, set_name)}
       />
@@ -153,6 +159,7 @@ export default function EmailForm() {
         placeholder="arthurdent@hotmail.com"
         required={true}
         autocomplete={"email"}
+        disabled={is_sending_email}
         value={email}
         onChange={(event) => on_input_change(event, set_email)}
       />
@@ -163,6 +170,7 @@ export default function EmailForm() {
         rows={5}
         placeholder="Don't panic ..."
         required={true}
+        disabled={is_sending_email}
         value={message}
         onChange={(event) => on_input_change(event, set_message)}
       />
