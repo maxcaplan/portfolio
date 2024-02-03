@@ -9,6 +9,8 @@ export default function Footer() {
     icon: JSX.Element;
   };
 
+  const email = "contact@maxcaplan.com";
+
   const socials: Social[] = [
     {
       href: "https://github.com/maxcaplan",
@@ -50,8 +52,6 @@ export default function Footer() {
       ),
     },
   ];
-
-  const email = "maxacaplan@gmail.com";
 
   const write_text_to_clipboard = async (text: string) => {
     try {
