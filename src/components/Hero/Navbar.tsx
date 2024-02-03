@@ -67,13 +67,13 @@ export function Navbar(_props: NavbarProps) {
 			>
 				<img
 					src={logoDark}
-					alt="logo"
+					alt="Max Caplan"
 					id="navbar-logo"
 					className="hidden md:flex self-stretch h-8"
 				/>
 				<img
 					src={logoSmDark}
-					alt="logo"
+					alt="Max Caplan"
 					id="navbar-logo-sm"
 					className="flex md:hidden self-stretch h-8"
 				/>
