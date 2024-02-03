@@ -18,9 +18,10 @@
 All commands are run from the root of the project, from a terminal:
 
 | Command                | Action                                                        |
-| :--------------------- | :------------------------------------------------------------ | ---------------------- | ------------------------------------------------------ |
+| :--------------------- | :------------------------------------------------------------ |
 | `npm run dev`          | Starts local dev server at `localhost:5173`                   |
-| `npm run build`        | Builds the client and server as an SSR application to `dist/` | `npm run build:client` | Builds the client side files for SSR to `dist/client/` |
+| `npm run build`        | Builds the client and server as an SSR application to `dist/` |
+| `npm run build:client` | Builds the client side files for SSR to `dist/client/`        |
 | `npm run build:server` | Builds the server side files for SSR to `dist/server`         |
 | `npm run generate`     | Generates a static version of the site to `dist/static`       |
 | `npm run serve`        | Serves the production built SSR application                   |
