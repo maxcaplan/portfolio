@@ -1,4 +1,4 @@
-import { RefObject, useEffect, useLayoutEffect, useRef, useState } from "react";
+import { RefObject, useEffect, useRef, useState } from "react";
 
 import WorkText from "./WorkText";
 
@@ -84,7 +84,7 @@ export default function BackgroundText(props: BackgroundTextProps) {
   };
 
   // On component did update
-  useLayoutEffect(() => {
+  useEffect(() => {
     handle_resize();
     // Attach resize event
     window.onresize = handle_resize;
