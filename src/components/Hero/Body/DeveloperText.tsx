@@ -30,7 +30,7 @@ export default function DeveloperText(props: DeveloperTextProps) {
 	}, [developer_text]);
 
 	return (
-		<h1
+		<h2
 			className={`
 					align-middle 
 					text-5xl 
@@ -44,6 +44,6 @@ export default function DeveloperText(props: DeveloperTextProps) {
 			{cursor_visible && (
 				<span className="text-4xl sm:text-6xl text-brand-white-200">█</span>
 			)}
-		</h1>
+		</h2>
 	);
 }

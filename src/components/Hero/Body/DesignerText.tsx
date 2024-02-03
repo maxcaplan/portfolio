@@ -73,7 +73,7 @@ export default function DesignerText(props: DesignerTextProps) {
 	}, []);
 
 	return (
-		<h1
+		<h2
 			className={`
 		relative
 		text-5xl 
@@ -112,6 +112,6 @@ export default function DesignerText(props: DesignerTextProps) {
 					R
 				</span>
 			</span>
-		</h1>
+		</h2>
 	);
 }
