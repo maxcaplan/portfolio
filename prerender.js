@@ -21,7 +21,7 @@ const routesToPrerender = fs
   for (const url of routesToPrerender) {
     const appHtml = render(url);
 
-    const html = template.replace(`<!--app-html-->`, appHtml);
+    const html = template.replace(`<!--ssr-outlet-->`, appHtml);
 
     const filePath = `dist/static${url === "/" ? "/index" : url}.html`;
     fs.writeFileSync(toAbsolute(filePath), html);
