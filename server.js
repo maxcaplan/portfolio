@@ -1,14 +1,70 @@
+// Node standard libs
+import os from "node:os";
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
+// Server libs
 import express from "express";
 import { createServer as createViteServer } from "vite";
 import sirv from "sirv";
 
+// Console formatting libs
+import chalk from "chalk";
+import boxen from "boxen";
+
+// Other libs
+import { program } from "commander";
+
+// CLI Arguments
+program.option("-p, --port <value>");
+program.option("-h, --host <value>");
+program.parse();
+const options = program.opts();
+
+// Constants
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const isProduction = process.env.NODE_ENV === "production";
-const port = process.env.PORT || 5173;
+const port = parseInt(options.port) || 5173;
+const host = options.host || "localhost";
+
+/**
+ * formats a log message for a server request
+ * @param req - The server request object
+ */
+function logRequest(req) {
+  const protocol = chalk.bgBlueBright
+    .hex("#FFF")
+    .bold(` ${req.protocol.toUpperCase()} `);
+  const date_string = new Date().toLocaleString().replace(",", "");
+  const client_ip = chalk.yellow(req.ip.replace("::ffff:", ""));
+  const request = chalk.cyan(`${req.method} ${req.originalUrl}`);
+  return `${protocol} ${date_string} ${client_ip} ${request}`;
+}
+
+/**
+ * Gets the IP address(s) of the server
+ */
+function getIps() {
+  let net_faces = os.networkInterfaces();
+
+  let ips = [];
+
+  // Iterate over network interfaces
+  Object.values(net_faces).forEach((net_face) => {
+    if (net_face === undefined) return;
+
+    // Iterate over network interface info
+    net_face.forEach((net_face_info) => {
+      // Skip over internal and non-IPv4 addresses
+      if (net_face_info.family !== "IPv4" || net_face_info.internal) return;
+
+      ips.push(net_face_info.address);
+    });
+  });
+
+  return ips;
+}
 
 /** Creates an http server for serving an SSR app */
 async function createServer() {
@@ -18,7 +74,7 @@ async function createServer() {
 
   if (!isProduction) {
     // Use vite dev server if in development environment
-    console.log("Starting server in development mode");
+    console.log(chalk.blue("Starting server in development mode..."));
 
     // Create Vite server in middleware mode
     vite = await createViteServer({
@@ -29,15 +85,18 @@ async function createServer() {
     app.use(vite.middlewares);
   } else {
     // Use sirv for static asset serving if in production environment
-    console.log("Starting server in production mode");
+    console.log(chalk.blue("Starting server in production mode..."));
+
     app.use(sirv("dist/client", { gzip: true }));
   }
 
-  app.use("*", async (req, res, next) => {
+  app.use("*", async (req, res) => {
     const url = req.originalUrl;
     let template, render;
 
     try {
+      if (!isProduction) console.log(logRequest(req));
+
       if (!isProduction) {
         // Read index.html
         template = fs.readFileSync(
@@ -69,7 +128,7 @@ async function createServer() {
       res.setHeader("Content-Type", "text/html").end(html);
     } catch (e) {
       if (!isProduction) vite.ssrFixStacktrace(e);
-      console.log(e);
+      console.error(e);
       res.status(500).end(e);
     }
   });
@@ -78,4 +137,25 @@ async function createServer() {
 }
 
 // Create server and start listening for http requests
-createServer().then((app) => app.listen(port));
+createServer().then((app) => {
+  app.listen(port, host);
+
+  if (isProduction) return;
+
+  const server_host = host === "0.0.0.0" ? getIps()[0] : host;
+
+  let start_message = `${chalk.bold("- Local:")} http://localhost:${port}`;
+  if (host === "0.0.0.0")
+    start_message += `\n${chalk.bold("- Network:")} http://${server_host}:${port}`;
+
+  console.log("");
+  console.log(
+    boxen(start_message, {
+      margin: 1,
+      padding: 1,
+      borderColor: "green",
+      title: "Server Started",
+      titleAlignment: "center",
+    }),
+  );
+});
