@@ -17,8 +17,14 @@ const routesToPrerender = fs
   });
 
 (async () => {
+  console.log(
+    `${routesToPrerender.length} route(s) found, beging prerendering...`,
+  );
+
   // pre-render each route...
   for (const url of routesToPrerender) {
+    console.log(`Prerendering ${url}...`);
+
     const appHtml = render(url);
 
     const html = template.replace(`<!--ssr-outlet-->`, appHtml);
@@ -26,4 +32,6 @@ const routesToPrerender = fs
     const filePath = `dist/static${url === "/" ? "/index" : url}.html`;
     fs.writeFileSync(toAbsolute(filePath), html);
   }
+
+  console.log("Prerender complete!");
 })();
