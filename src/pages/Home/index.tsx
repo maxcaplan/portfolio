@@ -25,19 +25,21 @@ function Home() {
 	const location = useLocation();
 	useScrollToHash(location.hash);
 
+	const handle_scroll = () => {
+		set_is_at_top(window.scrollY === 0);
+	};
+
 	// On component mounted
 	useEffect(() => {
-		set_is_at_top(window.scrollY === 0);
+		handle_scroll();
 
 		// Update is at top state on scroll
-		window.onscroll = () => {
-			set_is_at_top(window.scrollY === 0);
-		};
+		window.addEventListener("scroll", handle_scroll);
 
 		return () => {
-			window.onscroll = null;
+			window.removeEventListener("scroll", handle_scroll);
 		};
-	});
+	}, []);
 
 	return (
 		<PageWrapper>
