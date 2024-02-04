@@ -1,29 +1,39 @@
-import PageWrapper from "../../components/common/PageWrapper";
-import Footer from "../../components/Footer";
-import Hero from "../../components/Hero";
+import { useRef } from "react";
+import { useLocation } from "react-router-dom";
 
+// Hooks
+import useIsSticky from "../../utils/hooks/useIsSticky";
+import useScrollToHash from "../../utils/hooks/useScrollToHash";
+
+// Components
+import PageWrapper from "../../components/common/PageWrapper";
+import Navbar from "../../components/Navbar";
+import Hero from "../../components/Hero";
+import Footer from "../../components/Footer";
+
+// Page Sections
 import About from "../../components/Sections/About";
 import Contact from "../../components/Sections/Contact";
 import Work from "../../components/Sections/Work";
 
 function Home() {
+  const hero_ref = useRef<HTMLDivElement>(null);
+  const show_navbar = useIsSticky(hero_ref);
+
+  // Scroll to section with matching url hash on page loaded
+  const location = useLocation();
+  useScrollToHash(location.hash);
+
   return (
     <PageWrapper>
+      <Navbar
+        homePage={true}
+        className={`fixed top-0 left-0 z-[100] opacity-0 transition-opacity duration-200 ${show_navbar ? "opacity-100" : "opacity-0 pointer-events-none"}`}
+      />
       <div className="w-full h-full flex flex-col gap-y-20">
         <div className="flex flex-col xl:grid xl:grid-cols-3 xl:grid-flow-row w-full border-b border-brand-gray-700">
-          <div
-            className={`
-		  relative 
-		  xl:col-span-1 
-		  flex 
-		  flex-row 
-		  w-full 
-		  border-b
-		  xl:border-r 
-		  border-brand-gray-700 
-		  `}
-          >
-            <Hero className="sticky top-0" />
+          <div className="relative xl:col-span-1 flex flex-row w-full border-b xl:border-r border-brand-gray-700">
+            <Hero ref={hero_ref} className="sticky top-0" />
           </div>
 
           <div className="relative xl:col-span-2 flex flex-col gap-y-20 w-full pt-6 pb-20">
