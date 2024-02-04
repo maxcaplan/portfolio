@@ -10,10 +10,19 @@ import routes from "./router";
 
 import createFetchRequest from "./utils/createFetchRequest";
 
-export const render = async (req: express.Request) => {
-  const handler = createStaticHandler(routes);
-  const fetchRequest = createFetchRequest(req);
+/**
+ * Staticly renders a route given a request
+ * @param req - The request object for the route to be rendered
+ */
+export const render = async (
+  req: string | express.Request,
+): Promise<string> => {
+  const fetchRequest =
+    typeof req === "string"
+      ? new Request(new URL(req))
+      : createFetchRequest(req);
 
+  const handler = createStaticHandler(routes);
   const context = await handler.query(fetchRequest);
 
   if (context instanceof Response) throw new Error();

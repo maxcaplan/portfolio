@@ -6,7 +6,7 @@ import Works from "./content/work";
 
 import HomePage from "./pages/Home";
 import NotFoundPage from "./pages/404";
-import WorkPage from "./pages/Work";
+import WorkPage from "./pages/Work/[title]";
 
 const routes: RouteObject[] = [
   {
