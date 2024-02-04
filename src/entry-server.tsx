@@ -1,16 +1,26 @@
 import ReactDOMServer from "react-dom/server";
-import { StaticRouter } from "react-router-dom/server";
+import {
+  createStaticHandler,
+  createStaticRouter,
+  StaticRouterProvider,
+} from "react-router-dom/server";
+import express from "express";
 
-import Router from "./router";
+import routes from "./router";
 
-interface RenderProps {
-  path: string;
-}
+import createFetchRequest from "./utils/createFetchRequest";
 
-export const render = (props: RenderProps) => {
+export const render = async (req: express.Request) => {
+  const handler = createStaticHandler(routes);
+  const fetchRequest = createFetchRequest(req);
+
+  const context = await handler.query(fetchRequest);
+
+  if (context instanceof Response) throw new Error();
+
+  const router = createStaticRouter(handler.dataRoutes, context);
+
   return ReactDOMServer.renderToString(
-    <StaticRouter location={props.path}>
-      <Router />
-    </StaticRouter>,
+    <StaticRouterProvider router={router} context={context} />,
   );
 };
