@@ -3,7 +3,7 @@ import { RouteObject } from "react-router-dom";
 // Pages
 import HomePage from "./pages/Home";
 import NotFoundPage from "./pages/404";
-import WorkPage from "./pages/Work/[title]";
+import WorkPage from "./pages/Work/[id]";
 
 // Loaders
 import loadWork from "./loaders/Work";
@@ -18,7 +18,7 @@ const routes: RouteObject[] = [
 	},
 
 	{
-		path: "/work/:title",
+		path: "/work/:id",
 		element: <WorkPage />,
 		errorElement: <NotFoundPage />,
 		loader: (args) => {

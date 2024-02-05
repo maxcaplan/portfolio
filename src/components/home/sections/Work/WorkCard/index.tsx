@@ -17,7 +17,7 @@ const WorkCard: FunctionComponent<WorkCardProps> = (props) => {
 		? "col-start-2 col-end-4"
 		: "col-span-2";
 
-	const work_link = (title: string) => `/work/${title.toLowerCase()}`;
+	const work_link = (id: string) => `/work/${id.toLowerCase()}`;
 
 	return (
 		<div className="flex flex-col md:grid grid-cols-3 grid-rows-7 grid-flow-row gap-x-6 gap-y-4 w-full">
@@ -27,7 +27,7 @@ const WorkCard: FunctionComponent<WorkCardProps> = (props) => {
 				<div className="-z-10 absolute -bottom-2-left-2 xl:-bottom-4 xl:-left-4 xl:group-hover/card:-translate-x-2 xl:group-hover/card:translate-y-2 w-full h-full border border-brand-gray-400 bg-brand-gray-950 rounded transition duration-200"></div>
 
 				<Link
-					to={work_link(props.work.title)}
+					to={work_link(props.work.id)}
 					className="block aspect-[16/9] xl:aspect-auto w-full h-full overflow-hidden border border-brand-gray-400 rounded"
 				>
 					<img
@@ -39,7 +39,7 @@ const WorkCard: FunctionComponent<WorkCardProps> = (props) => {
 			</div>
 
 			<h3 className="col-span-1 row-span-1 text-2xl font-bold">
-				<Link to={work_link(props.work.title)}>{props.work.title}</Link>
+				<Link to={work_link(props.work.id)}>{props.work.title}</Link>
 			</h3>
 
 			<h4 className="col-span-1 row-span-1 text-xl text-brand-gray-300">
@@ -61,7 +61,7 @@ const WorkCard: FunctionComponent<WorkCardProps> = (props) => {
 
 			<div className="col-span-1 row-span-2 flex items-end">
 				<Link
-					to={work_link(props.work.title)}
+					to={work_link(props.work.id)}
 					className="px-4 py-1 rounded border-brand-gray-200 bg-brand-gray-800 border hover:bg-brand-gray-700"
 				>
 					see more &gt;

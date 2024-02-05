@@ -7,11 +7,11 @@ import { Work } from "../../types";
  * @param works - The array of works to load from
  */
 const loadWork = (
-	{ params }: LoaderFunctionArgs<{ params: { title: string } }>,
+	{ params }: LoaderFunctionArgs<{ params: { id: string } }>,
 	works: Work[],
 ) => {
 	let work = works.find((work) => {
-		return work.title.toLowerCase() === params.title;
+		return work.id.toLowerCase() === params.id;
 	});
 
 	return work;

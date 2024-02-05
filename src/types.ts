@@ -1,4 +1,8 @@
-export interface Work {
+export interface Content {
+	id: string;
+}
+
+export interface Work extends Content {
 	/** Title of the work */
 	title: string;
 	/** Date work was done */

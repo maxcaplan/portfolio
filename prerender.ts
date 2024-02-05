@@ -1,6 +1,9 @@
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
+import { createServer as createViteServer } from "vite";
+
+import { Content } from "./src/types.ts";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const toAbsolute = (p: string) => path.resolve(__dirname, p);
@@ -86,24 +89,59 @@ const get_page_paths = (pages_dir: string) => {
 const render_static_pages = async (paths: string[]) => {
 	console.log("Rendering static pages: \n");
 
-	paths.forEach(async (path) => {
-		console.log(`Rendering ${path}...`);
+	paths.forEach(async (page_path) => {
+		console.log(`Rendering ${page_path} ...`);
 
 		// Render app html
-		const appHtml = await render("http://localhost" + path);
+		const appHtml = await render("http://localhost" + page_path);
 
 		// Inject app html into template html
 		const html = template.replace(`<!--ssr-outlet-->`, appHtml);
 
 		// Write html to file
-		const filePath = `dist/static${path === "/" ? "/index" : path}.html`;
+		const filePath = `dist/static${page_path === "/" ? "/index" : page_path}.html`;
 		fs.writeFileSync(toAbsolute(filePath), html);
 	});
 };
 
 // TODO: Implement dynamic route rendering
 const render_dynamic_pages = async (paths: DynamicPage[]) => {
-	// console.log("Rendering dynamic pages: \n");
+	console.log("Rendering dynamic pages: \n");
+
+	// Open vite server
+	const vite = await createViteServer();
+
+	paths.forEach(async (dynamic_path) => {
+		const root = dynamic_path.path.split("/")[0];
+		const root_path = "/" + root.replace(/\.tsx$/, "").toLowerCase();
+
+		// Load array of all content for path
+		const content_arr = (
+			await vite.ssrLoadModule(`./src/content/${root}/index.ts`)
+		).default as Content[];
+
+		// Create directory for rendered pages
+		fs.mkdirSync(toAbsolute("dist/static" + root_path), { recursive: true });
+
+		content_arr.forEach(async (content) => {
+			const page_path = `${root_path}/${content.id}`;
+
+			console.log(`Rendering ${page_path} ...`);
+
+			// Render app html
+			const appHtml = await render("http://localhost" + page_path);
+
+			// Inject app html into template html
+			const html = template.replace(`<!--ssr-outlet-->`, appHtml);
+
+			// Write html to file
+			const filePath = `dist/static${page_path === "/" ? "/index" : page_path}.html`;
+			fs.writeFileSync(toAbsolute(filePath), html);
+		});
+	});
+
+	// Close vite server
+	vite.close();
 };
 
 (async () => {
