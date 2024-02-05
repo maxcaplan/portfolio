@@ -5,7 +5,7 @@ import { RefObject, useEffect, useState } from "react";
  * @param ref - A ref object for the element to observe
  */
 const useIsSticky = (ref: RefObject<HTMLElement>): boolean => {
-	const [is_sticky, set_is_sticky] = useState(false);
+	const [is_sticky, set_is_sticky] = useState(true);
 
 	useEffect(() => {
 		const observer = new IntersectionObserver(
