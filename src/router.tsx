@@ -1,12 +1,15 @@
-import { LoaderFunctionArgs, RouteObject } from "react-router-dom";
+import { RouteObject } from "react-router-dom";
 
-import { Work } from "./types";
-
-import Works from "./content/Work";
-
+// Pages
 import HomePage from "./pages/Home";
 import NotFoundPage from "./pages/404";
 import WorkPage from "./pages/Work/[title]";
+
+// Loaders
+import loadWork from "./loaders/Work";
+
+// Content
+import Works from "./content/Work";
 
 const routes: RouteObject[] = [
 	{
@@ -30,22 +33,5 @@ const routes: RouteObject[] = [
 		element: <NotFoundPage />,
 	},
 ];
-
-/**
- * Loads a work from and array of works
- * @param args.params - The route params
- * @param works - The array of works to load from
- */
-const loadWork = (
-	{ params }: LoaderFunctionArgs<{ params: { title: string } }>,
-	works: Work[],
-) => {
-	let work = works.find((work) => {
-		return work.title === params.title;
-	});
-	console.log("Work");
-
-	return work;
-};
 
 export default routes;

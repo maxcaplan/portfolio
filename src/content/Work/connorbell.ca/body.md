@@ -1,3 +1,3 @@
 Full portfolio website redesign for Connor Bell.
 
-Visit it here: [connorbell.ca](www.connorbell.ca)
+Visit it here: <a href="http://connorbell.ca/" target="_blank">connorbell.ca</a>
