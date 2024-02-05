@@ -68,12 +68,22 @@ The file structure of the project is as follows:
     ├── assets <-- Asset files
     ├── components <-- React components
     │   ├── common <-- Generic components
+    │   ├── Home <-- Home page components
     ├── content <-- Content to be displayed
-    │   └── work
+    │   └── Work <-- Work page content
     ├── css
     ├── pages <-- Site pages
+    │   └── Work
+    │       └── [title] <-- Dynamic page param
     └── utils <-- Utility functions
+        └── hooks <-- Custom react hooks
 ```
+
+Sub directories of either `src/components` or `src/pages` with names in PascalCase have an `index.tsx` file that is a component or page respectivly.
+
+`.tsx` files with PascalCase names in `src/components` denote a component file
+
+Content in `src/content` to be displayed on dynamic pages must have a parent directory name equal to the parent directory of the dynamic page. Example `src/pages/Work` gets it's content from `src/content/Work`
 
 ## Deploying
 

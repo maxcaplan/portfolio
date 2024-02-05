@@ -8,13 +8,13 @@ import useScrollToHash from "../../utils/hooks/useScrollToHash";
 // Components
 import PageWrapper from "../../components/common/PageWrapper";
 import Navbar from "../../components/Navbar";
-import Hero from "../../components/Hero";
+import Hero from "../../components/home/Hero";
 import Footer from "../../components/Footer";
 
 // Page Sections
-import About from "../../components/Sections/About";
-import Contact from "../../components/Sections/Contact";
-import Work from "../../components/Sections/Work";
+import About from "../../components/home/sections/About";
+import Contact from "../../components/home/sections/Contact";
+import Work from "../../components/home/sections/Work";
 
 function Home() {
 	const hero_ref = useRef<HTMLDivElement>(null);
