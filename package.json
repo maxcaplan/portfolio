@@ -8,7 +8,7 @@
     "build": "npm run build:client && npm run build:server",
     "build:client": "tsc && vite build --outDir dist/client",
     "build:server": "tsc && vite build --outDir dist/server --ssr src/entry-server.tsx",
-    "generate": "vite build --outDir dist/static && npm run build:server && node prerender",
+    "generate": "vite build --outDir dist/static && npm run build:server && tsx prerender",
     "serve": "NODE_ENV=production node server",
     "serve-static": "serve dist/static",
     "preview": "vite preview"
@@ -37,6 +37,7 @@
     "serve": "^14.2.1",
     "showdown": "^2.1.0",
     "tailwindcss": "^3.4.1",
+    "tsx": "^4.7.0",
     "typescript": "^5.3.3",
     "vite": "^3.0.0"
   }
