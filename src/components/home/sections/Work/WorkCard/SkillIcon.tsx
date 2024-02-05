@@ -1,7 +1,7 @@
 import { PropsWithChildren } from "react";
 
-import { Skill } from "../../../../types";
-import Tooltip from "../../../common/Tooltip/Tooltip";
+import { Skill } from "../../../../../types";
+import Tooltip from "../../../../common/Tooltip/Tooltip";
 
 interface SkillIconProps {
 	skill: Skill;

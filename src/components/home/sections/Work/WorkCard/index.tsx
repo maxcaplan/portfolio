@@ -1,10 +1,11 @@
 import { FunctionComponent, useEffect, useState } from "react";
-import { Work } from "../../../../types";
+import { Work } from "../../../../../types";
 import SkillIcon from "./SkillIcon";
 
 import showdown from "showdown";
 
-interface WorkCardProps extends Work {
+interface WorkCardProps {
+	work: Work;
 	flipped?: boolean;
 }
 
@@ -42,71 +43,20 @@ const WorkCard: FunctionComponent<WorkCardProps> = (props) => {
 		return text.join(" ");
 	};
 
-	useEffect(() => {
-		set_description(markdown_to_txt(props.description));
-	}, []);
+	// useEffect(() => {
+	// set_description(markdown_to_txt(props.work.description));
+	// }, []);
 
 	return (
-		<div
-			className={`
-	group/card
-	flex 
-	flex-col 
-	md:grid 
-	grid-cols-3 
-	grid-rows-7 
-	grid-flow-row 
-	gap-x-6 
-	gap-y-4 
-	w-full
-	`}
-		>
+		<div className="group/card flex flex-col md:grid grid-cols-3 grid-rows-7 grid-flow-row gap-x-6 gap-y-4 w-full">
 			<div
-				className={`
-		${image_flip_classes} 
-		row-span-7 
-		relative 
-		mb-2 
-		md:mb-0 
-		bg-brand-gray-800 
-		rounded
-		`}
+				className={`${image_flip_classes} row-span-7 relative mb-2 md:mb-0 bg-brand-gray-800 rounded`}
 			>
-				<div
-					className={`
-		-z-10 
-		absolute 
-		-bottom-2
-		-left-2
-		xl:-bottom-4 
-		xl:-left-4 
-		xl:group-hover/card:-translate-x-2
-		xl:group-hover/card:translate-y-2
-		w-full 
-		h-full 
-		border 
-		border-brand-gray-400 
-		bg-brand-gray-950
-		rounded
-		transition
-		duration-200
-		`}
-				></div>
+				<div className="-z-10 absolute -bottom-2-left-2 xl:-bottom-4 xl:-left-4 xl:group-hover/card:-translate-x-2 xl:group-hover/card:translate-y-2 w-full h-full border border-brand-gray-400 bg-brand-gray-950 rounded transition duration-200"></div>
 
-				<div
-					className={`
-		aspect-[16/9] 
-		xl:aspect-auto 
-		w-full 
-		h-full 
-		overflow-hidden 
-		border
-		border-brand-gray-400
-		rounded
-		`}
-				>
+				<div className="aspect-[16/9] xl:aspect-auto w-full h-full overflow-hidden border border-brand-gray-400 rounded">
 					<img
-						src={props.image}
+						src={props.work.coverImage}
 						alt="work image"
 						className="w-full h-full object-cover group-hover/card:scale-105 transition duration-200"
 					/>
@@ -114,36 +64,29 @@ const WorkCard: FunctionComponent<WorkCardProps> = (props) => {
 			</div>
 
 			<h3 className="col-span-1 row-span-1 text-2xl font-bold">
-				{props.title}
+				{props.work.title}
 			</h3>
 
 			<h4 className="col-span-1 row-span-1 text-xl text-brand-gray-300">
-				{leading_zero(props.date.month)}/{props.date.year}
+				{leading_zero(props.work.date.month)}/{props.work.date.year}
 			</h4>
 
 			<div className="col-span-1 row-span-2">
-				<p className="max-h-full font-sans line-clamp-3">{description}</p>
+				<p className="max-h-full font-sans line-clamp-3">
+					{props.work.description}
+				</p>
 			</div>
 
 			<div className="col-span-1 row-span-1 flex flex-row gap-2">
-				{props.skills &&
-					props.skills.map((skill, idx) => {
+				{props.work.skills &&
+					props.work.skills.map((skill, idx) => {
 						return <SkillIcon key={`skill-${idx}`} skill={skill} />;
 					})}
 			</div>
 
 			<div className="col-span-1 row-span-2 flex items-end">
 				<button
-					className={`
-		px-4 
-		py-1 
-		rounded 
-		border-brand-gray-200 
-		bg-brand-gray-800 
-		border 
-		hover:bg-brand-gray-700
-	    disabled:hidden
-		`}
+					className="px-4 py-1 rounded border-brand-gray-200 bg-brand-gray-800 border hover:bg-brand-gray-700 disabled:hidden"
 					disabled={true}
 				>
 					see more &gt;

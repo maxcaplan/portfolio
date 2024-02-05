@@ -17,15 +17,7 @@ export default function Work() {
 			<div className="relative z-50 flex flex-col w-full gap-28">
 				{Works.map((work, idx) => {
 					return (
-						<WorkCard
-							key={work.title}
-							title={work.title}
-							date={work.date}
-							description={work.description}
-							skills={work.skills}
-							image={work.image}
-							flipped={idx % 2 == 1}
-						/>
+						<WorkCard key={work.title} work={work} flipped={idx % 2 == 1} />
 					);
 				})}
 			</div>
