@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import Tooltip from "../../common/Tooltip/Tooltip";
+import Tooltip from "../../common/Tooltip";
 import { Link } from "react-router-dom";
 
 /** Hero section footer component */
