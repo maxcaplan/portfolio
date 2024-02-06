@@ -10,7 +10,7 @@ export default function Resume() {
           <a
             href="/assets/resume.pdf"
             download
-            className="flex flex-row items-center gap-2 px-2 py-1 rounded border border-brand-gray-600 hover:bg-brand-gray-700 transition duration-100"
+            className="flex flex-row items-center gap-2 px-2 py-1 rounded border border-brand-gray-400 hover:bg-brand-gray-700 transition duration-100"
           >
             {/* Download icon */}
             <svg

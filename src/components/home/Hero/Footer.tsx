@@ -126,11 +126,12 @@ export default function Footer() {
       {link_buttons(links)}
       <div className="flex flex-grow justify-end">
         <button
-          className="group/email relative"
+          className="group/email relative text-right"
           onMouseEnter={() => set_email_tooltip_text("click to copy")}
           onClick={() => write_text_to_clipboard(email)}
         >
-          {email}
+          <span className="inline sm:hidden">email@</span>
+          <span className="hidden sm:inline">{email}</span>
 
           <Tooltip
             className="hidden group-hover/email:inline -translate-y-1"
