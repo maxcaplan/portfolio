@@ -104,7 +104,7 @@ export default function Footer() {
     return links.map(({ href, icon, routerLink }, idx) => {
       if (routerLink) {
         return (
-          <Link to={href} className={className}>
+          <Link key={idx} to={href} className={className}>
             {icon}
           </Link>
         );
