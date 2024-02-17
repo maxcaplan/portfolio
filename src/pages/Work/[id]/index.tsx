@@ -21,7 +21,7 @@ export default function WorkPage() {
         <div className="flex flex-col gap-y-2">
           <div className="flex flex-col-reverse sm:flex-row gap-4 sm:items-center">
             <h1 className="flex-grow text-2xl sm:text-3xl font-bold">
-              <span>/work</span>
+              <Link to="/#work">/work</Link>
               <br className="sm:hidden" />
               <span>/{work.title}</span>
             </h1>

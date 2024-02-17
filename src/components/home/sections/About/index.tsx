@@ -112,6 +112,8 @@ export default function About() {
           className={`
 		flex 
 		flex-col 
+		items-center
+		md:items-start
 		md:grid 
 		grid-flow-row 
 		grid-cols-3 
@@ -124,21 +126,35 @@ export default function About() {
         >
           <picture>
             <source
+              media="(min-width: 768px)"
+              srcSet="assets/images/about/max_caplan_sm.webp"
+              type="image/webp"
+            />
+            <source
               srcSet="assets/images/about/max_caplan_md.webp"
               type="image/webp"
+            />
+
+            <source
+              media="(min-width: 768px)"
+              srcSet="assets/images/about/max_caplan_sm.png"
+              type="image/png"
             />
             <source
               srcSet="assets/images/about/max_caplan_md.png"
               type="image/png"
             />
+
             <img
-              src="assets/images/about/max_caplan_md.png"
+              src="assets/images/about/max_caplan_sm.png"
+              width="380"
+              height="380"
               alt="Max Caplan"
-              className="md:col-span-1 w-full rounded shadow border border-brand-gray-400"
+              className="md:col-span-1 w-full md:max-w-[380px] rounded shadow border border-brand-gray-400"
             />
           </picture>
 
-          <div className="md:col-span-2 flex flex-col gap-y-6">
+          <div className="md:col-span-2 flex flex-col gap-y-6 w-full">
             <div className="w-full h-fit border border-brand-purple rounded p-6 leading-8">
               <p className="font-bold text-brand-purple">
                 guest<span className="text-brand-white">@</span>maxcaplan.com
