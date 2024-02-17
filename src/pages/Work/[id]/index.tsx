@@ -58,12 +58,46 @@ export default function WorkPage() {
 
         <hr className="border-brand-gray-700" />
 
-        <div className="flex justify-center w-full">
-          <img
-            src={work.coverImage}
-            alt="work image"
-            className="w-full max-w-4xl rounded shadow border border-brand-gray-400"
-          />
+        <div className="flex justify-center w-full relative">
+          <picture>
+            <source
+              media="(min-width: 580px)"
+              srcSet={`${work.coverImage}cover_lg.webp`}
+              type="image/webp"
+            />
+            <source
+              media="(min-width: 380px)"
+              srcSet={`${work.coverImage}cover_md.webp`}
+              type="image/webp"
+            />
+            <source
+              srcSet={`${work.coverImage}cover_sm.webp`}
+              type="image/webp"
+            />
+
+            <source
+              media="(min-width: 580px)"
+              srcSet={`${work.coverImage}cover_lg.png`}
+              type="image/png"
+            />
+            <source
+              media="(min-width: 380px)"
+              srcSet={`${work.coverImage}cover_md.png`}
+              type="image/png"
+            />
+            <source
+              srcSet={`${work.coverImage}cover_sm.png`}
+              type="image/png"
+            />
+
+            <img
+              src={`${work.coverImage}cover_sm.png`}
+              width="580"
+              height="337"
+              alt={`${work.title}`}
+              className="w-full max-w-4xl rounded shadow border border-brand-gray-400"
+            />
+          </picture>
         </div>
 
         <div className="flex sm:justify-end">

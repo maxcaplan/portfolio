@@ -30,11 +30,35 @@ const WorkCard: FunctionComponent<WorkCardProps> = (props) => {
           to={work_link(props.work.id)}
           className="block aspect-[16/9] xl:aspect-auto w-full h-full overflow-hidden border border-brand-gray-400 rounded"
         >
-          <img
-            src={props.work.coverImage}
-            alt="work image"
-            className="w-full h-full object-cover group-hover/card:scale-105 transition duration-200"
-          />
+          <picture>
+            <source
+              media="(min-width: 768px)"
+              srcSet={`${props.work.coverImage}cover_md.webp`}
+              type="image/webp"
+            />
+            <source
+              srcSet={`${props.work.coverImage}cover_sm.webp`}
+              type="image/webp"
+            />
+
+            <source
+              media="(min-width: 768px)"
+              srcSet={`${props.work.coverImage}cover_md.png`}
+              type="image/png"
+            />
+            <source
+              srcSet={`${props.work.coverImage}cover_sm.png`}
+              type="image/png"
+            />
+
+            <img
+              src={`${props.work.coverImage}cover_sm.png`}
+              width="580"
+              height="337"
+              alt={`${props.work.title}`}
+              className="w-full h-full object-cover group-hover/card:scale-105 transition duration-200"
+            />
+          </picture>
         </Link>
       </div>
 
