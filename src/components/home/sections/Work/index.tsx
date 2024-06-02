@@ -5,13 +5,17 @@ import Works from "../../../../content/Work";
 import Section from "../Section";
 import { Link } from "react-router-dom";
 
+interface WorkProps {
+  sectionNumber: number
+}
+
 /** Work section component */
-export default function Work() {
+export default function Work(props: WorkProps) {
   return (
     <div>
       <Section
         title="work"
-        number={1}
+        number={props.sectionNumber}
         titleClassName="!decoration-brand-blue"
         backgroundChildren={<Background className="w-2/3 xl:w-1/2" />}
         backgroundWrapperClassName="flex justify-end p-4"

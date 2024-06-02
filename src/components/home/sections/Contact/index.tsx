@@ -4,8 +4,12 @@ import SectionHeader from "../SectionHeader";
 import ContactGrid from "./ContactGrid";
 import EmailForm from "./EmailForm";
 
+interface ContactProps {
+	sectionNumber: number
+}
+
 /** Home page contact section component */
-export default function Contact() {
+export default function Contact(props: ContactProps) {
 	const [do_fade_in, set_do_fade_in] = useState(false);
 
 	const trigger_ref = useRef<HTMLDivElement>(null);
@@ -43,7 +47,7 @@ export default function Contact() {
 
 			<SectionHeader
 				title="contact"
-				number={3}
+				number={props.sectionNumber}
 				className="decoration-brand-red"
 			/>
 

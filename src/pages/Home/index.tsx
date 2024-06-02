@@ -12,9 +12,8 @@ import Hero from "../../components/home/Hero";
 import Footer from "../../components/Footer";
 
 // Page Sections
-import About from "../../components/home/sections/About";
+import Sections from "../../components/home/sections";
 import Contact from "../../components/home/sections/Contact";
-import Work from "../../components/home/sections/Work";
 
 function Home() {
 	const hero_ref = useRef<HTMLDivElement>(null);
@@ -53,14 +52,10 @@ function Home() {
 						<Hero ref={hero_ref} className="sticky top-0" />
 					</div>
 
-					<div className="relative xl:col-span-2 flex flex-col gap-y-20 w-full pt-6 pb-20">
-						<Work />
-
-						<About />
-					</div>
+					<Sections className="relative xl:col-span-2 flex flex-col gap-y-20 w-full pt-6 pb-20" />
 				</div>
 
-				<Contact />
+				<Contact sectionNumber={4} />
 
 				<Footer />
 			</div>

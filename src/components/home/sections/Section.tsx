@@ -14,22 +14,11 @@ interface SectionProps {
 export default function Section(props: SectionProps) {
 	return (
 		<section
-			className={`
-	relative 
-	w-full 
-	${props.className}`}
-			id={props.title}
+			className={`relative w-full ${props.className}`} id={props.title}
 		>
 			{props.backgroundChildren != undefined && (
 				<div
-					className={`
-		z-0 
-		absolute 
-		top-0 
-		left-0 
-		w-full 
-		h-full 
-		${props.backgroundWrapperClassName || ""}`}
+					className={`z-0 absolute top-0 left-0 w-full h-full ${props.backgroundWrapperClassName || ""}`}
 				>
 					{props.backgroundChildren}
 				</div>

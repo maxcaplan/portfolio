@@ -4,8 +4,12 @@ import Section from "../Section";
 import Background from "./Background";
 import TermPrompt from "./TermPrompt";
 
+interface AboutProps {
+  sectionNumber: number
+}
+
 /** Home page about section component */
-export default function About() {
+export default function About(props: AboutProps) {
   const [current_line, set_current_line] = useState(-1);
   const [active_line, set_active_line] = useState(0);
 
@@ -94,7 +98,7 @@ export default function About() {
   return (
     <Section
       title="about"
-      number={2}
+      number={props.sectionNumber}
       titleClassName="decoration-brand-green"
       backgroundChildren={<Background />}
     >
