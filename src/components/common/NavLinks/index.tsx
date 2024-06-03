@@ -21,6 +21,11 @@ export default function NavLinks(props: NavLinksProps) {
       className: "hover:underline hover:decoration-brand-blue",
     },
     {
+      name: "projects",
+      href: "#projects",
+      className: "hover:underline hover:decoration-brand-green",
+    },
+    {
       name: "skills",
       href: "#skills",
       className: "hover:underline hover:decoration-brand-green",
