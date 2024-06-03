@@ -19,11 +19,11 @@ export default function WorkPage() {
     <PageWrapperWithNavAndFooter>
       <div className="flex-grow flex flex-col gap-y-6 w-full max-w-4xl mx-auto p-6">
         <div className="flex flex-col gap-y-2">
-          <div className="flex flex-col-reverse sm:flex-row gap-4 sm:items-center">
-            <h1 className="flex-grow text-2xl sm:text-3xl font-bold">
-              <Link to="/#work">/work</Link>
+          <div itemScope itemType="https://schema.org/Article" className="flex flex-col-reverse sm:flex-row gap-4 sm:items-center">
+            <h1 itemScope itemType="https://schema.org/BreadcrumbList" className="flex-grow text-2xl sm:text-3xl font-bold">
+              <Link itemProp="itemListElement" to="/#work">/work</Link>
               <br className="sm:hidden" />
-              <span>/{work.title}</span>
+              <Link itemProp="itemListElement" to={`/work/${work.id}`}>/{work.title}</Link>
             </h1>
 
             <div className="flex justify-end w-full md:w-auto">

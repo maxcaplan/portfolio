@@ -102,7 +102,7 @@ export default function About(props: AboutProps) {
       titleClassName="decoration-brand-green"
       backgroundChildren={<Background />}
     >
-      <div ref={trigger_ref} className="relative flex flex-col gap-y-6 w-full">
+      <div itemScope itemType="https://schema.org/Person" ref={trigger_ref} className="relative flex flex-col gap-y-6 w-full">
         <TermPrompt
           directory="~"
           text="maxfetch"
@@ -150,6 +150,7 @@ export default function About(props: AboutProps) {
             />
 
             <img
+              itemProp="image"
               src="assets/images/about/max_caplan_sm.png"
               width="380"
               height="380"
@@ -167,7 +168,7 @@ export default function About(props: AboutProps) {
               <p className="font-bold text-brand-white">---------</p>
 
               <p className="font-bold text-brand-white">
-                <span className="text-brand-purple">Name</span>: Max Caplan
+                <span className="text-brand-purple">Name</span>: <span itemProp="name">Max Caplan</span>
               </p>
 
               <p className="font-bold text-brand-white">
@@ -219,6 +220,7 @@ export default function About(props: AboutProps) {
         />
 
         <p
+          itemProp="description"
           className={`
 		  transition
 		  duration-500

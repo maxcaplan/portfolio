@@ -20,7 +20,7 @@ const WorkCard: FunctionComponent<WorkCardProps> = (props) => {
   const work_link = (id: string) => `/work/${id.toLowerCase()}`;
 
   return (
-    <div className="flex flex-col md:grid grid-cols-3 grid-rows-7 grid-flow-row gap-x-6 gap-y-4 w-full">
+    <div itemScope itemType="https://schema.org/Article" className="flex flex-col md:grid grid-cols-3 grid-rows-7 grid-flow-row gap-x-6 gap-y-4 w-full">
       <div
         className={`${image_flip_classes} group/card row-span-7 relative mb-2 md:mb-0 bg-brand-gray-800 rounded`}
       >
@@ -52,6 +52,7 @@ const WorkCard: FunctionComponent<WorkCardProps> = (props) => {
             />
 
             <img
+              itemProp="thumbnail"
               src={`${props.work.coverImage}cover_sm.png`}
               width="580"
               height="337"
@@ -63,7 +64,7 @@ const WorkCard: FunctionComponent<WorkCardProps> = (props) => {
       </div>
 
       <h3 className="col-span-1 row-span-1 text-2xl font-bold">
-        <Link to={work_link(props.work.id)}>{props.work.title}</Link>
+        <Link itemProp="url" to={work_link(props.work.id)}><span itemProp="name">{props.work.title}</span></Link>
       </h3>
 
       <h4 className="col-span-1 row-span-1 text-xl text-brand-gray-300">
@@ -71,7 +72,7 @@ const WorkCard: FunctionComponent<WorkCardProps> = (props) => {
       </h4>
 
       <div className="col-span-1 row-span-2">
-        <p className="max-h-full font-sans line-clamp-3">
+        <p itemProp="description" className="max-h-full font-sans line-clamp-3">
           {props.work.description}
         </p>
       </div>
