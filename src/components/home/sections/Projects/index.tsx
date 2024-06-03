@@ -1,4 +1,6 @@
 import Section from "../Section";
+import { default as Content } from "../../../../content/Projects";
+import ProjectCard from "./ProjectCard";
 
 interface ProjectProps {
 	sectionNumber: number
@@ -15,6 +17,13 @@ export default function Projects(props: ProjectProps) {
 				className="mb-28"
 			>
 				<div className="relative z-50 flex flex-col w-full gap-28">
+					{Content.map((project, idx) => {
+						return (
+							<ProjectCard key={project.title} project={project} flipped={idx % 2 == 1} />
+						);
+					})
+
+					}
 				</div>
 			</Section>
 		</div>
