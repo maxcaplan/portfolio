@@ -70,7 +70,7 @@ export default function Background() {
   })
 
   return (
-    <div ref={wrapper_ref} className="absolute flex flex-row w-full h-48 overflow-hidden" style={{ transform: `rotate(${rotation}deg)`, width: `${length}px`, backgroundImage: `url("${BackgroundTextPath}")`, backgroundSize: 'contain', animation: 'bg-scroll 16s infinite linear' }}>
+    <div ref={wrapper_ref} className="absolute flex flex-row w-full h-48 overflow-hidden bg-contain bg-repeat-x" style={{ transform: `rotate(${rotation}deg)`, width: `${length}px`, backgroundImage: `url("${BackgroundTextPath}")`, animation: 'bg-scroll 16s infinite linear' }}>
       <style>
         {
           `@keyframes bg-scroll { 0% { background-position: 0% } 100% { background-position: ${background_width}px } }`
