@@ -24,7 +24,7 @@ const WorkCard: FunctionComponent<WorkCardProps> = (props) => {
       <div
         className={`${image_flip_classes} group/card row-span-7 relative mb-2 md:mb-0 bg-brand-gray-800 rounded`}
       >
-        <div className="-z-10 absolute -bottom-2-left-2 xl:-bottom-4 xl:-left-4 xl:group-hover/card:-translate-x-2 xl:group-hover/card:translate-y-2 w-full h-full border border-brand-gray-400 bg-brand-gray-950 rounded transition duration-200"></div>
+        <div className="-z-10 absolute xl:-bottom-4 xl:-left-4 xl:group-hover/card:-translate-x-2 xl:group-hover/card:translate-y-2 w-full h-full border border-brand-gray-400 bg-brand-gray-950 rounded transition duration-200"></div>
 
         <Link
           to={work_link(props.work.id)}
