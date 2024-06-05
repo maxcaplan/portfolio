@@ -1,6 +1,7 @@
 import Section from "../Section";
 import { default as Content } from "../../../../content/Projects";
 import ProjectCard from "./ProjectCard";
+import Background from "./Background";
 
 interface ProjectProps {
 	sectionNumber: number
@@ -13,7 +14,8 @@ export default function Projects(props: ProjectProps) {
 				title="projects"
 				number={props.sectionNumber}
 				titleClassName="!decoration-brand-green"
-				backgroundWrapperClassName="flex justify-end p-4"
+				backgroundChildren={<Background />}
+				backgroundWrapperClassName="overflow-hidden flex justify-center items-center"
 				className="mb-28"
 			>
 				<div className="relative z-50 flex flex-col w-full gap-28">
