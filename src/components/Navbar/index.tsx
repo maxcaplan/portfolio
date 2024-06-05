@@ -32,7 +32,7 @@ export default function Navbar(props: NavbarProps) {
   return (
     <div className={`z-10 w-full ${props.className || "relative"}`}>
       {/** Menu drawer */}
-      <div className={`-z-10 box-border absolute w-full h-fit bottom-0 border-b border-brand-gray-700 bg-brand-gray-900 transition-transform duration-200 ${menu_open ? "translate-y-[100%]" : ""}`}>
+      <div className={`-z-10 box-border absolute w-full h-fit bottom-0 border-b border-brand-gray-700 bg-brand-gray-900 transition-transform duration-200 block lg:hidden ${menu_open ? "translate-y-[100%]" : ""}`}>
 
         <NavLinks
           homePage={props.homePage}
