@@ -5,6 +5,7 @@ import { addLeadingZeros } from "../../../../../utils/numberFormatting";
 import { Work } from "../../../../../types";
 import SkillIcon from "../../../../common/SkillIcon";
 import { Link } from "react-router-dom";
+import ImageShader from "../../../../common/ImageShader";
 
 interface WorkCardProps {
   work: Work;
@@ -19,6 +20,19 @@ const WorkCard: FunctionComponent<WorkCardProps> = (props) => {
 
   const work_link = (id: string) => `/work/${id.toLowerCase()}`;
 
+  const frag_source = `
+    precision mediump float;
+
+    varying highp vec2 v_texcoord;
+
+    uniform sampler2D u_texture;
+
+    void main() {
+      //vec4 tex_col = texture2D(u_texture, v_texcoord);
+      //gl_FragColor = vec4(tex_col.x + 1., 1., 1., 1.);
+      gl_FragColor = texture2D(u_texture, v_texcoord);
+    }`
+
   return (
     <div itemScope itemType="https://schema.org/Article" className="flex flex-col md:grid grid-cols-3 grid-rows-7 grid-flow-row gap-x-6 gap-y-4 w-full">
       <div
@@ -30,36 +44,34 @@ const WorkCard: FunctionComponent<WorkCardProps> = (props) => {
           to={work_link(props.work.id)}
           className="block aspect-[16/9] xl:aspect-auto w-full h-full overflow-hidden border border-brand-gray-400 rounded"
         >
-          <picture>
-            <source
-              media="(min-width: 768px)"
-              srcSet={`${props.work.coverImage}cover_md.webp`}
-              type="image/webp"
-            />
-            <source
-              srcSet={`${props.work.coverImage}cover_sm.webp`}
-              type="image/webp"
-            />
-
-            <source
-              media="(min-width: 768px)"
-              srcSet={`${props.work.coverImage}cover_md.png`}
-              type="image/png"
-            />
-            <source
-              srcSet={`${props.work.coverImage}cover_sm.png`}
-              type="image/png"
-            />
-
-            <img
-              itemProp="thumbnail"
-              src={`${props.work.coverImage}cover_sm.png`}
-              width="580"
-              height="337"
-              alt={`${props.work.title}`}
-              className="w-full h-full object-cover group-hover/card:scale-105 transition duration-200"
-            />
-          </picture>
+          <ImageShader
+            src={`${props.work.coverImage}cover_sm.png`}
+            srcSet={[
+              {
+                media: "(min-width: 768px)",
+                srcSet: `${props.work.coverImage}cover_md.webp`,
+                type: "image/webp"
+              },
+              {
+                srcSet: `${props.work.coverImage}cover_sm.webp`,
+                type: "image/webp"
+              },
+              {
+                media: "(min-width: 768px)",
+                srcSet: `${props.work.coverImage}cover_md.png`,
+                type: "image/png"
+              },
+              {
+                srcSet: `${props.work.coverImage}cover_sm.webp`,
+                type: "image/png"
+              },
+            ]}
+            fragSource={frag_source}
+            width={580}
+            height={337}
+            alt={`${props.work.title}`}
+            wrapperClassName="w-full h-full object-cover group-hover/card:scale-105 transition duration-200"
+          />
         </Link>
       </div>
 
