@@ -67,8 +67,6 @@ const WorkCard: FunctionComponent<WorkCardProps> = (props) => {
               },
             ]}
             fragSource={frag_source}
-            width={580}
-            height={337}
             alt={`${props.work.title}`}
             wrapperClassName="w-full h-full object-cover group-hover/card:scale-105 transition duration-200"
           />
