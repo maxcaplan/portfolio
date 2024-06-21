@@ -56,7 +56,6 @@ export class UniformProp {
 
   /** Set uniform to prop value */
   set_value(gl: WebGLRenderingContext): void {
-    console.log("Set value of " + this.name)
     let location = this.location || null
     let x = this.x
     let y = this.y

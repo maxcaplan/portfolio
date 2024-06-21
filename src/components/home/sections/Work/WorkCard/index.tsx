@@ -72,6 +72,7 @@ const WorkCard: FunctionComponent<WorkCardProps> = (props) => {
             fragSource={frag_source}
             uniforms={new UniformProp("u_test", 0)}
             animate={true}
+            frameRate={24}
             wrapperClassName="w-full h-full object-cover group-hover/card:scale-105 transition duration-200"
           />
         </Link>

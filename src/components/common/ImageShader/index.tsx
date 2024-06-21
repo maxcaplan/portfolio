@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { ImageSource, get_image_src } from "../../../utils/webgl/images"
 import {
 	create_program_from_strings,
@@ -61,6 +61,9 @@ export default function ImageShader(props: ImageShaderProps) {
 	// Canvas dimensions
 	let [canvas_width, set_canvas_width] = useState<number | null>(null)
 	let [canvas_height, set_canvas_height] = useState<number | null>(null)
+
+	// Animation interval id
+	let [anim_interval_id, set_anim_interval_id] = useState<NodeJS.Timeout | null>(null)
 
 	// Canvas element reference
 	let canvas_ref = useRef<HTMLCanvasElement>(null)
@@ -329,6 +332,26 @@ export default function ImageShader(props: ImageShaderProps) {
 		return width / height
 	}
 
+	let start_animation = (frame_rate: number = 60): NodeJS.Timeout => {
+		// Calculate frame delay in milliseconds
+		let delay = Math.round((1 / frame_rate) * 1000)
+
+		return setInterval(() => render(), delay)
+	}
+
+	let set_animated = (animate: boolean, frame_rate?: number) => {
+		if (anim_interval_id !== null) {
+			clearInterval(anim_interval_id)
+			set_anim_interval_id(null)
+		}
+
+		if (animate) {
+			const interval_id = start_animation(frame_rate)
+			set_anim_interval_id(interval_id)
+		}
+
+	}
+
 	/** Image fallback component */
 	let Image = (props: ImageProps) => {
 		if (props.srcSet === undefined) {
@@ -385,6 +408,7 @@ export default function ImageShader(props: ImageShaderProps) {
 	useEffect(() => {
 		if (!can_render) return
 		render()
+		set_animated(props.animate || false, props.frameRate)
 	}, [can_render])
 
 	// Reset position buffer and rerender when canvas dimensions change
@@ -408,19 +432,24 @@ export default function ImageShader(props: ImageShaderProps) {
 
 	}, [canvas_width, canvas_height])
 
+	// Start or stop animation interval for animated prop change
+	useEffect(() => {
+		set_animated(props.animate || false, props.frameRate)
+	}, [props.animate, props.frameRate])
+
 	// Component did mount
 	useEffect(() => {
 		if (props.width !== undefined) set_canvas_width(props.width)
 		if (props.height !== undefined) set_canvas_height(props.height)
 
-		window.requestAnimationFrame(() => {
-			window.addEventListener("resize", handle_resize)
-			let { width, height } = handle_resize()
-			init(canvas_ref, vert_source, props.fragSource, width, height, props.uniforms)
-		})
+		window.addEventListener("resize", handle_resize)
+		let { width, height } = handle_resize()
+		init(canvas_ref, vert_source, props.fragSource, width, height, props.uniforms)
 
 		return () => {
 			window.removeEventListener("resize", handle_resize)
+
+			if (anim_interval_id !== null) clearInterval(anim_interval_id)
 		}
 	}, [])
 
