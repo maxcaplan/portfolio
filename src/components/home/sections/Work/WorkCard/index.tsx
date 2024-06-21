@@ -6,6 +6,7 @@ import { Work } from "../../../../../types";
 import SkillIcon from "../../../../common/SkillIcon";
 import { Link } from "react-router-dom";
 import ImageShader from "../../../../common/ImageShader";
+import { UniformProp } from "../../../../../utils/webgl/webgl";
 
 interface WorkCardProps {
   work: Work;
@@ -27,10 +28,11 @@ const WorkCard: FunctionComponent<WorkCardProps> = (props) => {
 
     uniform sampler2D u_texture;
 
+    uniform float u_test;
+
     void main() {
-      //vec4 tex_col = texture2D(u_texture, v_texcoord);
-      //gl_FragColor = vec4(tex_col.x + 1., 1., 1., 1.);
-      gl_FragColor = texture2D(u_texture, v_texcoord);
+      vec4 tex_col = texture2D(u_texture, v_texcoord);
+      gl_FragColor = tex_col + vec4(u_test, 0., 0., 0.);
     }`
 
   return (
@@ -66,8 +68,10 @@ const WorkCard: FunctionComponent<WorkCardProps> = (props) => {
                 type: "image/png"
               },
             ]}
-            fragSource={frag_source}
             alt={`${props.work.title}`}
+            fragSource={frag_source}
+            uniforms={new UniformProp("u_test", 0)}
+            animate={true}
             wrapperClassName="w-full h-full object-cover group-hover/card:scale-105 transition duration-200"
           />
         </Link>
