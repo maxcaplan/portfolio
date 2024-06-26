@@ -1,5 +1,5 @@
 import Background from "./Background";
-import WorkCard from "./WorkCard";
+import ContentCard from "../../../common/ContentCard";
 
 import Works from "../../../../content/Work";
 import Section from "../Section";
@@ -11,6 +11,7 @@ interface WorkProps {
 
 /** Work section component */
 export default function Work(props: WorkProps) {
+  const work_link = (id: string) => `/work/${id.toLowerCase()}`;
   return (
     <div>
       <Section
@@ -24,7 +25,17 @@ export default function Work(props: WorkProps) {
         <div className="relative z-50 flex flex-col w-full gap-28">
           {Works.map((work, idx) => {
             return (
-              <WorkCard key={work.title} work={work} flipped={idx % 2 == 1} />
+              <ContentCard
+                key={work.title}
+                contentId={work.id}
+                title={work.title}
+                date={work.date}
+                description={work.description}
+                skills={work.skills}
+                coverRoot={work.coverImage}
+                link={work_link(work.id)}
+                flipped={idx % 2 == 1}
+              />
             );
           })}
         </div>

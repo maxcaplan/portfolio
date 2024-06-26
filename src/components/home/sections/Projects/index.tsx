@@ -1,13 +1,16 @@
 import Section from "../Section";
 import { default as Content } from "../../../../content/Projects";
-import ProjectCard from "./ProjectCard";
+import ContentCard from "../../../common/ContentCard";
 import Background from "./Background";
+
 
 interface ProjectProps {
 	sectionNumber: number
 }
 
 export default function Projects(props: ProjectProps) {
+	const project_link = (id: string) => `/projects/${id.toLowerCase()}`;
+
 	return (
 		<div>
 			<Section
@@ -21,7 +24,17 @@ export default function Projects(props: ProjectProps) {
 				<div className="relative z-50 flex flex-col w-full gap-28">
 					{Content.map((project, idx) => {
 						return (
-							<ProjectCard key={project.title} project={project} flipped={idx % 2 == 1} />
+							<ContentCard
+								key={project.title}
+								contentId={project.id}
+								title={project.title}
+								date={project.date}
+								description={project.description}
+								skills={project.skills}
+								coverRoot={project.coverImage}
+								link={project_link(project.id)}
+								flipped={idx % 2 == 1}
+							/>
 						);
 					})
 
