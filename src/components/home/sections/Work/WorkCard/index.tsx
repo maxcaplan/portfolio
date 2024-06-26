@@ -1,10 +1,13 @@
-import { FunctionComponent } from "react";
+import { FunctionComponent, useEffect, useRef, useState } from "react";
 
 import { addLeadingZeros } from "../../../../../utils/numberFormatting";
 
 import { Work } from "../../../../../types";
 import SkillIcon from "../../../../common/SkillIcon";
 import { Link } from "react-router-dom";
+import ImageShader from "../../../../common/ImageShader";
+
+import frag_source from "./frag.glsl?raw"
 
 interface WorkCardProps {
   work: Work;
@@ -13,11 +16,64 @@ interface WorkCardProps {
 
 /** Work section work card component */
 const WorkCard: FunctionComponent<WorkCardProps> = (props) => {
+  const [mouse_x, set_mouse_x] = useState(-1000)
+  const [mouse_y, set_mouse_y] = useState(-1000)
+
+  const image_shader_ref = useRef<HTMLDivElement>(null)
+
   const image_flip_classes = props.flipped
     ? "col-start-2 col-end-4"
     : "col-span-2";
 
   const work_link = (id: string) => `/work/${id.toLowerCase()}`;
+
+  const handle_mouse_move = (event: MouseEvent) => {
+    if (image_shader_ref.current === null) {
+      set_mouse_x(0)
+      set_mouse_y(0)
+      return
+    }
+
+    const image_rect = image_shader_ref.current.getBoundingClientRect()
+
+    const x = event.clientX - image_rect.left
+    const y = event.clientY - image_rect.top
+
+    set_mouse_x(x)
+    set_mouse_y(y)
+  }
+
+  const frag_source_old = `
+    precision highp float;
+
+    uniform vec2 u_resolution;
+    uniform sampler2D u_texture;
+
+    uniform float u_time;
+    uniform vec2 u_mouseCoord;
+
+    void main() {
+      vec2 uv = gl_FragCoord.xy / u_resolution;
+      vec2 muv = u_mouseCoord / u_resolution;
+      muv.x = muv.x * -1.;
+      // uv = uv + muv;
+
+      vec4 tex_col = texture2D(u_texture, vec2(uv.x, 1. - uv.y));
+      
+      vec3 col = 0.5 + 0.5*cos(u_time * 0.01 + uv.xyx + vec3(0,2,4));
+      
+      // gl_FragColor = tex_col;
+      gl_FragColor = vec4(col, 1.);
+    }`
+
+  // Component did mount
+  useEffect(() => {
+    window.addEventListener("mousemove", handle_mouse_move)
+
+    return () => {
+      window.removeEventListener("mousemove", handle_mouse_move)
+    }
+  }, [])
 
   return (
     <div itemScope itemType="https://schema.org/Article" className="flex flex-col md:grid grid-cols-3 grid-rows-7 grid-flow-row gap-x-6 gap-y-4 w-full">
@@ -30,36 +86,36 @@ const WorkCard: FunctionComponent<WorkCardProps> = (props) => {
           to={work_link(props.work.id)}
           className="block aspect-[16/9] xl:aspect-auto w-full h-full overflow-hidden border border-brand-gray-400 rounded"
         >
-          <picture>
-            <source
-              media="(min-width: 768px)"
-              srcSet={`${props.work.coverImage}cover_md.webp`}
-              type="image/webp"
-            />
-            <source
-              srcSet={`${props.work.coverImage}cover_sm.webp`}
-              type="image/webp"
-            />
-
-            <source
-              media="(min-width: 768px)"
-              srcSet={`${props.work.coverImage}cover_md.png`}
-              type="image/png"
-            />
-            <source
-              srcSet={`${props.work.coverImage}cover_sm.png`}
-              type="image/png"
-            />
-
-            <img
-              itemProp="thumbnail"
-              src={`${props.work.coverImage}cover_sm.png`}
-              width="580"
-              height="337"
-              alt={`${props.work.title}`}
-              className="w-full h-full object-cover group-hover/card:scale-105 transition duration-200"
-            />
-          </picture>
+          <ImageShader
+            ref={image_shader_ref}
+            src={`${props.work.coverImage}cover_sm.png`}
+            srcSet={[
+              {
+                media: "(min-width: 768px)",
+                srcSet: `${props.work.coverImage}cover_md.webp`,
+                type: "image/webp"
+              },
+              {
+                srcSet: `${props.work.coverImage}cover_sm.webp`,
+                type: "image/webp"
+              },
+              {
+                media: "(min-width: 768px)",
+                srcSet: `${props.work.coverImage}cover_md.png`,
+                type: "image/png"
+              },
+              {
+                srcSet: `${props.work.coverImage}cover_sm.webp`,
+                type: "image/png"
+              },
+            ]}
+            alt={`${props.work.title}`}
+            fragSource={frag_source}
+            customUniforms={[{ name: "u_mouseCoord", x: mouse_x, y: mouse_y }]}
+            animate={true}
+            frameRate={24}
+            wrapperClassName="w-full h-full object-cover group-hover/card:scale-105 transition duration-200"
+          />
         </Link>
       </div>
 
