@@ -26,7 +26,7 @@ interface ImageShaderProps {
 	height?: number,
 	alt?: string,
 	srcSet?: ImageSource[],
-	customUniforms?: UniformProp | UniformProp[],
+	customUniforms?: UniformProp[],
 	animate?: boolean,
 	frameRate?: number,
 	className?: string,
@@ -34,14 +34,9 @@ interface ImageShaderProps {
 	wrapperClassName?: string,
 }
 
-interface CustomUniform {
+interface CustomUniformLocation {
 	name: string,
 	location: WebGLUniformLocation | null,
-	x: number,
-	y?: number,
-	z?: number,
-	w?: number,
-	is_int?: Boolean,
 }
 
 
@@ -58,7 +53,8 @@ const ImageShader = forwardRef<HTMLDivElement, ImageShaderProps>((props, ref) =>
 	// Uniform location state
 	let [res_location, set_res_location] = useState<WebGLUniformLocation | null>(null) // Resolution uniform
 	let [sampler_location, set_sampler_location] = useState<WebGLUniformLocation | null>(null) // Sampler uniform
-	let [custom_uniforms, set_custom_uniforms] = useState<CustomUniform[]>([])
+	let [time_location, set_time_location] = useState<WebGLUniformLocation | null>(null) // Time uniform
+	let [custom_locations, set_custom_locations] = useState<CustomUniformLocation[]>([]) // Custom uniforms
 
 	// Buffer state
 	let [pos_buffer, set_pos_buffer] = useState<WebGLBuffer | null>(null) // Position buffer
@@ -102,13 +98,15 @@ const ImageShader = forwardRef<HTMLDivElement, ImageShaderProps>((props, ref) =>
 	) => {
 		// Set resolution uniform location
 		const resolution_unif_location = gl.getUniformLocation(program, "u_resolution")
-		if (resolution_unif_location === null) console.error("can't get u_resolution uniform location")
 		set_res_location(resolution_unif_location)
 
 		// Set texture sampler uniform location
 		const sampler_unif_location = gl.getUniformLocation(program, "u_texture")
-		if (sampler_unif_location === null) console.error("can't get u_texture uniform location")
 		set_sampler_location(sampler_unif_location)
+
+		// Set time uniform location
+		const time_unif_location = gl.getUniformLocation(program, "u_time")
+		set_time_location(time_unif_location)
 	}
 
 	/** Sets the location for custom shader uniforms */
@@ -116,12 +114,22 @@ const ImageShader = forwardRef<HTMLDivElement, ImageShaderProps>((props, ref) =>
 		gl: WebGLRenderingContext,
 		program: WebGLProgram,
 	) => {
-		const updated_uniforms = custom_uniforms.map((uniform) => {
-			uniform.location = get_uniform_location(gl, program, uniform.name)
-			return uniform
+		if (props.customUniforms === undefined) return
+
+		let update_custom_locations = [...custom_locations]
+
+		props.customUniforms.forEach(({ name: u_name }) => {
+			const lidx = custom_locations.findIndex(({ name: l_name }) => l_name === u_name)
+
+			if (lidx < 0) {
+				update_custom_locations.push({
+					name: u_name,
+					location: gl.getUniformLocation(program, u_name)
+				})
+			}
 		})
 
-		set_custom_uniforms(updated_uniforms)
+		set_custom_locations(update_custom_locations)
 	}
 
 	/** Set the values for shader uniforms */
@@ -134,49 +142,20 @@ const ImageShader = forwardRef<HTMLDivElement, ImageShaderProps>((props, ref) =>
 		// Set sampler uniform value
 		gl.uniform1i(sampler_location, 0)
 
+		// Set time uniform value
+		gl.uniform1f(time_location, tick)
+
 		// Set uniform prop values
-		custom_uniforms.forEach(({ location, x, y, z, w }) => {
-			set_uniform_value(gl, location, x, y, z, w)
-		})
-	}
 
-	let update_custom_uniforms = (uniforms?: UniformProp | UniformProp[]) => {
-		if (uniforms === undefined) {
-			set_custom_uniforms([])
-			return
-		}
+		if (props.customUniforms === undefined) return
 
-		if (!(uniforms instanceof Array)) {
-			uniforms = [uniforms]
-		}
+		props.customUniforms.forEach(({ name: u_name, x, y, z, w, is_int }) => {
+			const lidx = custom_locations.findIndex(({ name: l_name }) => l_name === u_name)
 
-		let updated_uniforms: CustomUniform[] = [...custom_uniforms]
-
-		uniforms.forEach(({ name, x, y, z, w, is_int }) => {
-			const u_idx = updated_uniforms.findIndex(
-				(u_uniform) => u_uniform.name === name
-			)
-
-			if (u_idx < 0) {
-				updated_uniforms.push({
-					name,
-					x,
-					y,
-					z,
-					w,
-					is_int,
-					location: null
-				})
-			} else {
-				updated_uniforms[u_idx].x = x
-				updated_uniforms[u_idx].y = y
-				updated_uniforms[u_idx].z = z
-				updated_uniforms[u_idx].w = w
-				updated_uniforms[u_idx].is_int = is_int
+			if (lidx >= 0) {
+				set_uniform_value(gl, custom_locations[lidx].location, x, y, z, w, is_int)
 			}
 		})
-
-		set_custom_uniforms(updated_uniforms)
 	}
 
 	/** Initializes webgl and shaders */
@@ -382,29 +361,6 @@ const ImageShader = forwardRef<HTMLDivElement, ImageShaderProps>((props, ref) =>
 		if (!can_render) return
 		render()
 	}, [tick])
-
-	// Update custom uniforms when props change
-	useEffect(() => {
-		update_custom_uniforms(props.customUniforms)
-	}, [props.customUniforms])
-
-	// Get any custom uniform locations that are null when custom uniforms changes
-	useEffect(() => {
-		if (gl === null || shader_prog === null) return
-
-		let updated = false
-		const updated_uniforms = custom_uniforms.map((uniform) => {
-			if (uniform.location === null && gl !== null && shader_prog !== null) {
-				uniform.location = get_uniform_location(gl, shader_prog, uniform.name)
-				updated = true
-			}
-
-			return uniform
-		})
-
-		if (updated) set_custom_uniforms(updated_uniforms)
-	}, [custom_uniforms, gl, shader_prog])
-
 
 	// Updated can render state
 	useEffect(() => {

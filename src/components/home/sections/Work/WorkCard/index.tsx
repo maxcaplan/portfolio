@@ -6,7 +6,8 @@ import { Work } from "../../../../../types";
 import SkillIcon from "../../../../common/SkillIcon";
 import { Link } from "react-router-dom";
 import ImageShader from "../../../../common/ImageShader";
-// import { useUniform } from "../../../../../utils/hooks/useUniform";
+
+import frag_source from "./frag.glsl?raw"
 
 interface WorkCardProps {
   work: Work;
@@ -15,8 +16,8 @@ interface WorkCardProps {
 
 /** Work section work card component */
 const WorkCard: FunctionComponent<WorkCardProps> = (props) => {
-  const [mouse_x, set_mouse_x] = useState(0)
-  const [mouse_y, set_mouse_y] = useState(0)
+  const [mouse_x, set_mouse_x] = useState(-1000)
+  const [mouse_y, set_mouse_y] = useState(-1000)
 
   const image_shader_ref = useRef<HTMLDivElement>(null)
 
@@ -42,12 +43,13 @@ const WorkCard: FunctionComponent<WorkCardProps> = (props) => {
     set_mouse_y(y)
   }
 
-  const frag_source = `
+  const frag_source_old = `
     precision highp float;
 
     uniform vec2 u_resolution;
     uniform sampler2D u_texture;
 
+    uniform float u_time;
     uniform vec2 u_mouseCoord;
 
     void main() {
@@ -57,9 +59,11 @@ const WorkCard: FunctionComponent<WorkCardProps> = (props) => {
       // uv = uv + muv;
 
       vec4 tex_col = texture2D(u_texture, vec2(uv.x, 1. - uv.y));
-
-      gl_FragColor = tex_col;
-      // gl_FragColor = vec4(uv.xy, 1., 1.);
+      
+      vec3 col = 0.5 + 0.5*cos(u_time * 0.01 + uv.xyx + vec3(0,2,4));
+      
+      // gl_FragColor = tex_col;
+      gl_FragColor = vec4(col, 1.);
     }`
 
   // Component did mount
@@ -107,7 +111,7 @@ const WorkCard: FunctionComponent<WorkCardProps> = (props) => {
             ]}
             alt={`${props.work.title}`}
             fragSource={frag_source}
-            // customUniforms={{ name: "u_mouseCoord", x: mouse_x, y: mouse_y }}
+            customUniforms={[{ name: "u_mouseCoord", x: mouse_x, y: mouse_y }]}
             animate={true}
             frameRate={24}
             wrapperClassName="w-full h-full object-cover group-hover/card:scale-105 transition duration-200"
