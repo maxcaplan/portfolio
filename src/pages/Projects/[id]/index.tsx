@@ -7,6 +7,7 @@ import { PageWrapperWithNavAndFooter } from "../../../components/common/PageWrap
 
 import { addLeadingZeros } from "../../../utils/numberFormatting";
 import SkillIcon from "../../../components/common/SkillIcon";
+import ContentLinks from "../../../components/common/ContentLinks";
 
 export default function ProjectPage() {
   const project = useLoaderData() as Project;
@@ -100,14 +101,20 @@ export default function ProjectPage() {
           </picture>
         </div>
 
-        <div className="flex sm:justify-end">
-          <div className="flex flex-grow sm:flex-grow-0 gap-2 items-center p-2 sm:p-3 rounded border border-brand-gray-600 shadow">
-            <p className="flex-grow sm:flex-grow-0">skills:</p>
+        <div className="flex flex-col-reverse sm:flex-row gap-y-3 items-start">
+          <div className="flex gap-x-3 flex-grow">
+            <ContentLinks sourceHref={project.source} demoHref={project.demo} />
+          </div>
 
-            <div className="flex flex-row gap-2">
-              {project.skills.map((skill, idx) => (
-                <SkillIcon key={idx} skill={skill} className="p-2" />
-              ))}
+          <div className="flex sm:justify-end">
+            <div className="flex flex-grow sm:flex-grow-0 gap-2 items-center p-2 sm:p-3 rounded border border-brand-gray-600 shadow">
+              <p className="flex-grow sm:flex-grow-0">skills:</p>
+
+              <div className="flex flex-row gap-2">
+                {project.skills.map((skill, idx) => (
+                  <SkillIcon key={idx} skill={skill} className="p-2" />
+                ))}
+              </div>
             </div>
           </div>
         </div>
@@ -117,6 +124,6 @@ export default function ProjectPage() {
           className="prose prose-brand font-sans prose-headings:font-mono prose-li:marker:font-mono"
         ></div>
       </div>
-    </PageWrapperWithNavAndFooter>
+    </PageWrapperWithNavAndFooter >
   );
 }

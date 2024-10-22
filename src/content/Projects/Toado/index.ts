@@ -10,7 +10,8 @@ const project: Project = {
 	body: body,
 	coverImage: `/assets/images/projects/toado/cover/`,
 	images: [],
-	skills: [Skill.rust]
+	skills: [Skill.rust],
+	source: "https://github.com/maxcaplan/toado"
 }
 
 export default project;

@@ -1,5 +1,4 @@
 import { Skill, Work } from "../../../types";
-// import loadMarkdown from "../../../utils/loadMarkdown";
 import body from "./body.md?raw";
 
 const description =
@@ -13,11 +12,11 @@ const GoodGoods: Work = {
     year: 2020,
   },
   description: description,
-  // body: loadMarkdown("src/content/Work/GoodGoods/body.md", "./body.md"),
   body: body,
   skills: [Skill.vue, Skill.javascript, Skill.firebase],
   coverImage: `/assets/images/works/goodgoods/cover/`,
   images: [],
+  demo: "https://nuxt--good-goods.netlify.app/"
 };
 
 export default GoodGoods;

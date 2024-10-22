@@ -4,4 +4,4 @@ I transformed the ideas given to me into a demo application to be used in fundin
 
 The demo was created with Nuxt Js and included features for user authentication and profiles, a filtered feed for products, and a backend tool for businesses to create and curate products for the platform.
 
-Visit the live demo here: <a href="http://www.goodgoods.ca" target="_blank">goodgoods.ca</a>
+Visit the demo <a href="https://nuxt--good-goods.netlify.app/" target="_blank">here</a>

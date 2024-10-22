@@ -20,6 +20,10 @@ export interface Work extends Content {
   images: string[];
   /** Skills used in work */
   skills: Skill[];
+  /** Link to project demo */
+  demo?: string;
+  /** Link to project source code */
+  source?: string;
 }
 
 export enum Skill {
@@ -49,4 +53,8 @@ export interface Project extends Content {
   images: string[];
   /** Skills used in project */
   skills: Skill[];
+  /** Link to project demo */
+  demo?: string;
+  /** Link to project source code */
+  source?: string;
 }
