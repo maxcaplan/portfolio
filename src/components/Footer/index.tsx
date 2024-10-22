@@ -4,7 +4,6 @@ import { useState } from "react";
 export default function Footer() {
   let [emoticons, set_emoticons] = useState<string>(":) :( :/ :O")
   let [emoticon_timer, set_emoticon_timer] = useState<NodeJS.Timeout | undefined>()
-  let [emoticon_is_mouse_over, set_emoticon_is_mouse_over] = useState(false)
 
   const random_emoticons = (emoticons: string[]) => {
     // Randomize the emoticon array using the Durstenfeld shuffle
@@ -19,7 +18,6 @@ export default function Footer() {
   }
 
   const on_mouse_enter_emoticons: React.MouseEventHandler = () => {
-    set_emoticon_is_mouse_over(true)
     if (emoticon_timer === undefined) set_emoticons(random_emoticons(emoticons.split(" ")))
 
     set_emoticon_timer(setInterval(() => {
@@ -30,9 +28,8 @@ export default function Footer() {
   }
 
   const on_mouse_leave_emoticons: React.MouseEventHandler = () => {
-    set_emoticon_is_mouse_over(false)
     if (emoticon_timer === undefined) return
-    clearTimeout(emoticon_timer)
+    clearInterval(emoticon_timer)
     set_emoticon_timer(undefined)
   }
 
