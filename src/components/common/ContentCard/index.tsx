@@ -1,4 +1,4 @@
-import { FunctionComponent } from "react";
+import { FunctionComponent, MouseEventHandler, useEffect, useRef, useState } from "react";
 
 import { addLeadingZeros } from "../../../utils/numberFormatting";
 
@@ -19,20 +19,95 @@ interface ContentCardProps {
 
 /** Card component for displaying content */
 const ContentCard: FunctionComponent<ContentCardProps> = (props) => {
+  const image_wrapper_ref = useRef<HTMLAnchorElement>(null);
+  const invert_circle_ref = useRef<HTMLDivElement>(null);
+
+  const [is_image_hovered, set_is_image_hovered] = useState(false)
+  const [is_circle_hidden, set_is_circle_hidden] = useState(true)
+  const [mouse_has_moved, set_mouse_has_moved] = useState(false)
+  const [circle_x, set_circle_x] = useState(-1000)
+  const [circle_y, set_circle_y] = useState(-1000)
+  const [target_x, set_target_x] = useState(-1000)
+  const [target_y, set_target_y] = useState(-1000)
+  const [tick, set_tick] = useState(0)
+
+  const handle_mouse_move = (event: MouseEvent) => {
+    if (!mouse_has_moved) set_mouse_has_moved(true)
+
+    if (image_wrapper_ref.current === null) return
+    if (invert_circle_ref.current === null) return
+
+    const wrapper_rect = image_wrapper_ref.current.getBoundingClientRect()
+    const circle_rect = invert_circle_ref.current.getBoundingClientRect()
+
+    let x = event.clientX - wrapper_rect.left - circle_rect.width / 2
+    let y = event.clientY - wrapper_rect.top - circle_rect.height / 2
+
+    set_target_x(x)
+    set_target_y(y)
+  }
+
+  const lerp = (x: number, y: number, a: number): number => x * (1 - a) + y * a;
+
+  const set_circle_transform = () => {
+    if (invert_circle_ref.current === null) return
+
+    let new_x = lerp(circle_x, target_x, 0.1)
+    let new_y = lerp(circle_y, target_y, 0.1)
+
+    invert_circle_ref.current.style.transform = `translate(${new_x}px, ${new_y}px)`
+
+    set_circle_x(new_x)
+    set_circle_y(new_y)
+  }
+
+  const update_is_circle_hidden = () => {
+    set_is_circle_hidden(image_wrapper_ref.current === null || invert_circle_ref === null)
+  }
+
   const image_flip_classes = props.flipped
     ? "col-start-2 col-end-4"
     : "col-span-2";
+
+  useEffect(() => {
+    set_circle_transform()
+  }, [tick])
+
+  useEffect(() => {
+    update_is_circle_hidden()
+  }, [image_wrapper_ref, invert_circle_ref])
+
+  // Component did mount
+  useEffect(() => {
+    update_is_circle_hidden()
+    window.addEventListener("mousemove", handle_mouse_move)
+
+    const anim = () => {
+      set_tick((t) => t += 1)
+      window.requestAnimationFrame(anim)
+    }
+
+    window.requestAnimationFrame(anim)
+    set_circle_transform()
+
+    return () => {
+      window.removeEventListener("mousemove", handle_mouse_move)
+    }
+  }, [])
 
   return (
     <div itemScope itemType="https://schema.org/Article" className="flex flex-col md:grid grid-cols-3 grid-rows-7 grid-flow-row gap-x-6 gap-y-4 w-full">
       <div
         className={`${image_flip_classes} group/card row-span-7 relative mb-2 md:mb-0 bg-brand-gray-800 rounded`}
+        onMouseEnter={() => set_is_image_hovered(true)}
+        onMouseLeave={() => set_is_image_hovered(false)}
       >
         <div className="-z-10 absolute xl:-bottom-4 xl:-left-4 xl:group-hover/card:-translate-x-2 xl:group-hover/card:translate-y-2 w-full h-full border border-brand-gray-400 bg-brand-gray-950 rounded transition duration-200"></div>
 
         <Link
+          ref={image_wrapper_ref}
           to={props.link}
-          className="block aspect-[16/9] xl:aspect-auto w-full h-full overflow-hidden border border-brand-gray-400 rounded"
+          className="relative block aspect-[16/9] xl:aspect-auto w-full h-full overflow-hidden border border-brand-gray-400 rounded"
         >
           <picture>
             <source
@@ -64,6 +139,15 @@ const ContentCard: FunctionComponent<ContentCardProps> = (props) => {
               className="w-full h-full object-cover group-hover/card:scale-105 transition duration-200"
             />
           </picture>
+
+          <div
+            ref={invert_circle_ref}
+            className={`absolute aspect-square bg-white rounded-full mix-blend-difference top-0 left-0 ${is_circle_hidden || !mouse_has_moved ? "hidden" : ""}`}
+            style={{
+              height: is_image_hovered ? "12em" : "10em",
+              transition: "height cubic-bezier(0.4, 0, 0.2, 1) 0.2s"
+            }}
+          ></div>
         </Link>
       </div>
 
