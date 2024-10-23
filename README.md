@@ -1,17 +1,6 @@
+![maxcaplan.com cover image](https://raw.githubusercontent.com/maxcaplan/portfolio/refs/heads/master/public/assets/images/projects/max_caplan/cover/cover_lg.png)
+
 [![Netlify Status](https://api.netlify.com/api/v1/badges/49f2ed15-a9df-4ec3-8085-6131915c8a86/deploy-status)](https://app.netlify.com/sites/maxcaplan/deploys)
-
-    ==================================================================
-         __    __  ______  __  __
-        /\ "-./  \/\  __ \/\_\_\_\
-        \ \ \-./\ \ \  __ \/_/\_\/_
-         \ \_\ \ \_\ \_\ \_\/\_\/\_\
-          \/_/  \/_/\/_/\/_/\/_/\/_/__  __      ______  __   __
-               /\  ___\/\  __ \/\  == \/\ \    /\  __ \/\ "-.\ \
-               \ \ \___\ \  __ \ \  _-/\ \ \___\ \  __ \ \ \-.  \
-                \ \_____\ \_\ \_\ \_\   \ \_____\ \_\ \_\ \_\\"\_\
-                 \/_____/\/_/\/_/\/_/    \/_____/\/_/\/_/\/_/ \/_/
-
-    ======================= Developer/Designer =======================
 
 ## >\_ Commands
 
@@ -115,3 +104,19 @@ This site is proudly open source and made using `Typescript` with the following 
 - [React](https://react.dev/) for UI
 - [TailwindCSS](https://tailwindcss.com/) for styling
 - And several other libraries
+
+---
+
+    ==================================================================
+         __    __  ______  __  __
+        /\ "-./  \/\  __ \/\_\_\_\
+        \ \ \-./\ \ \  __ \/_/\_\/_
+         \ \_\ \ \_\ \_\ \_\/\_\/\_\
+          \/_/  \/_/\/_/\/_/\/_/\/_/__  __      ______  __   __
+               /\  ___\/\  __ \/\  == \/\ \    /\  __ \/\ "-.\ \
+               \ \ \___\ \  __ \ \  _-/\ \ \___\ \  __ \ \ \-.  \
+                \ \_____\ \_\ \_\ \_\   \ \_____\ \_\ \_\ \_\\"\_\
+                 \/_____/\/_/\/_/\/_/    \/_____/\/_/\/_/\/_/ \/_/
+
+    ======================= Developer/Designer =======================
+    
