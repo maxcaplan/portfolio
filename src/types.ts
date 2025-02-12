@@ -35,6 +35,8 @@ export enum Skill {
   ruby,
   tailwind,
   rust,
+  wordpress,
+  shopify,
 }
 
 /** Content for projects section and pages */
