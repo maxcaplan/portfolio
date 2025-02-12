@@ -177,7 +177,7 @@ export default function EmailForm() {
 			/>
 
 			<div
-				className={`w-full py-2 rounded border border-brand-red-900 bg-brand-red-400 overflow-x-scroll whitespace-nowrap opacity-0 transition-opacity duration-200 ${is_form_error && form_error_message != ""
+				className={`w-full py-2 rounded border border-brand-red-900 bg-brand-red-400 overflow-x-auto whitespace-nowrap opacity-0 transition-opacity duration-200 ${is_form_error && form_error_message != ""
 						? "block opacity-100"
 						: "hidden"
 					}`}
