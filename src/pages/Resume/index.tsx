@@ -8,7 +8,7 @@ export default function Resume() {
           <h1 className="flex-grow text-2xl sm:text-3xl font-bold">/resume</h1>
 
           <a
-            href="/assets/resume.pdf"
+            href="/assets/max_caplan_resume.pdf"
             download
             className="flex flex-row items-center gap-2 px-2 py-1 rounded border border-brand-gray-400 hover:bg-brand-gray-700 transition duration-100"
           >
@@ -37,7 +37,7 @@ export default function Resume() {
 
         <object
           type="application/pdf"
-          data="/assets/resume.pdf"
+          data="/assets/max_caplan_resume.pdf"
           width="500px"
           className="w-full aspect-[2/3] rounded shadow"
         />
