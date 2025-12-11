@@ -100,8 +100,4 @@ const ContentCard: FunctionComponent<ContentCardProps> = (props) => {
   );
 };
 
-ContentCard.defaultProps = {
-  flipped: false,
-};
-
 export default ContentCard;
