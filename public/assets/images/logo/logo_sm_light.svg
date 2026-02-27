@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="45"
+   height="36"
+   viewBox="0 0 45 36"
+   fill="none"
+   version="1.1"
+   id="svg2"
+   sodipodi:docname="logo_sm_light.svg"
+   inkscape:version="1.3 (0e150ed6c4, 2023-07-21)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview2"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="8.131728"
+     inkscape:cx="19.368577"
+     inkscape:cy="32.772862"
+     inkscape:window-width="1259"
+     inkscape:window-height="1493"
+     inkscape:window-x="1287"
+     inkscape:window-y="52"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg2" />
+  <g
+     id="g6"
+     transform="translate(-0.61071801)"
+     style="stroke:none;fill:#121212;fill-opacity:1">
+    <path
+       d="M 25.8408,-3.05176e-5 V 11.9335 h 3.9778 V 7.95563 h 12.1331 v 3.97787 h 3.9778 V -3.05176e-5 Z M 30.0182,12.133 v 11.7339 h 11.734 v -3.9778 h 4.1773 V 16.1108 H 41.7522 V 12.133 Z M 25.8408,24.0665 V 36 H 45.9295 V 24.0665 h -3.9778 v 3.9778 H 29.8186 v -3.9778 z"
+       fill="white"
+       id="path1"
+       style="fill:#121212;stroke:none;fill-opacity:1"
+       />
+    <path
+       d="M 21.349,28.0443 H 16.2957 V 14.0875 c 0,-0.5615 -0.1471,-0.9759 -0.4412,-1.2433 -0.2674,-0.2941 -0.6283,-0.4411 -1.0829,-0.4411 -0.5347,0 -0.9625,0.1604 -1.2833,0.4812 -0.2941,0.3209 -0.4412,0.8021 -0.4412,1.4438 V 28.0443 H 7.99378 V 14.0875 c 0,-0.5615 -0.16041,-0.9759 -0.48124,-1.2433 -0.29413,-0.2941 -0.65507,-0.4411 -1.08286,-0.4411 -0.48128,0 -0.88235,0.1604 -1.20319,0.4812 -0.32084,0.3209 -0.48126,0.8021 -0.48126,1.4438 V 28.0443 H -0.308105 V 8.15184 H 4.74523 v 1.92506 h 0.7219 C 5.62763,9.35503 5.98857,8.7668 6.54995,8.31227 7.13818,7.83101 7.9002,7.59038 8.83601,7.59038 c 0.88232,0 1.63099,0.24063 2.24589,0.72189 0.615,0.45453 1.0294,1.04276 1.2433,1.76463 h 0.7219 c 0.2139,-0.72187 0.6551,-1.3101 1.3235,-1.76463 0.6952,-0.48126 1.5508,-0.72189 2.5667,-0.72189 1.3369,0 2.4064,0.45453 3.2086,1.36359 0.8021,0.88232 1.2031,2.11223 1.2031,3.68973 z"
+       fill="white"
+       id="path2"
+       style="fill:#121212;stroke:none;fill-opacity:1"
+       />
+  </g>
+</svg>
