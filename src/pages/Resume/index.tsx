@@ -43,7 +43,7 @@ export default function Resume() {
         />
 
         <p className="text-end italic text-brand-gray-300">
-          updated 02/06/2024
+          updated 02/24/2026
         </p>
       </div>
     </PageWrapperWithNavAndFooter>
