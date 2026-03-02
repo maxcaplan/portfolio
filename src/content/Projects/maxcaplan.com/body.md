@@ -1,8 +1,8 @@
-**maxcaplan.com** is my personal portfolio for my development and design projects and work. The site was designed with the goal to elevate the presentation of my work while also demonstrating my design skills. The design was implemented to be fast and responsive with custom animations and effects to add a level of interactivity not possible through other mediums of portfolio presentation.
+**maxcaplan.com** is my personal portfolio for my projects and work as a developer and designer. The site was designed with the goal to elevate the presentation of my work while also demonstrating my design skills. The design was implemented to be fast and responsive with custom animations and effects to add a level of interactivity not possible through other mediums of portfolio presentation.
 
-## *The Design*
+## _The Design_
 
-My portfolio has gone through several complete redesigns over the years of my design and development journey.
+maxcaplan.com has gone through several iterations over the years of my design and development journey.
 
 <picture class="mb-0">
     <source
@@ -21,15 +21,15 @@ My portfolio has gone through several complete redesigns over the years of my de
     />
 </picture>
 
-*An old landing page design for maxcaplan.com*
+_An old landing page design for maxcaplan.com_
 
-The current design utilizes a unique one thirds two thirds column layout to achive a visually interesting and destinct design whithout compramizing on usability or user experience (UX).
+The current design utilizes a unique one thirds two thirds column layout to achive a visually interesting and destinct design whithout compromising on usability or user experience (UX).
 
 The website follows a brutalist design style to create punchy, attention grabbing visuals without detracting from the content of the portfolio. The design utilizes dark colours, a monospaced font, and artistic typography to create a design language reminisent of a code editor or terminal.
 
-## *The Development*
+## _The Development_
 
-The website design was implemented using React JS and Tailwind CSS for the front end. <a href="https://vite.dev/" target="_blank">Vite</a> was used to create a custom static site generator making the final deployed site lightweight and fast.
+The website design was implemented using React JS and Tailwind CSS for the front end. <a href="https://vite.dev/" target="_blank">Vite</a> was used to create a custom static site generator pipeline making the final deployed site lightweight and fast.
 
 ---
 
