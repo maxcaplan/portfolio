@@ -37,6 +37,7 @@ export enum Skill {
   rust,
   wordpress,
   shopify,
+  sass,
 }
 
 /** Content for projects section and pages */
@@ -44,7 +45,7 @@ export interface Project extends Content {
   /** Title of the project */
   title: string;
   /** Date project was created */
-  date: { month: number, year: number };
+  date: { month: number; year: number };
   /** Description of project */
   description: string;
   /** Body text of project. Markdown or plain text */
